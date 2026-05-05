@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6: The Natural — The Connection Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {--black:#0a0a0a;--off-white:#f5f0e8;--accent:#c8392b;--gold:#d4a853;--muted:#7a7060;--card:#141414;--border:rgba(255,255,255,0.07);--module-color:#8e44ad;}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--off-white);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;}
+  .grain{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.5;}
+  nav{padding:20px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--gold);text-decoration:none;}
+  .nav-back{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+  .nav-back:hover{color:var(--off-white);}
+  .module-hero{padding:80px 48px 60px;max-width:800px;margin:0 auto;}
+  .module-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--module-color);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+  .module-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--module-color);}
+  .module-hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,58px);font-weight:900;line-height:1.08;margin-bottom:12px;}
+  .module-hero h1 em{font-style:italic;color:var(--module-color);}
+  .module-subtitle{font-size:20px;color:var(--muted);font-style:italic;font-family:'Playfair Display',serif;}
+  .progress-bar{width:100%;height:2px;background:rgba(255,255,255,0.06);margin:40px 0 0;}
+  .progress-fill{height:100%;background:var(--module-color);width:100%;}
+  .content{max-width:800px;margin:0 auto;padding:60px 48px 100px;}
+  .section{margin-bottom:64px;}
+  .section h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:24px;color:var(--off-white);}
+  .section p{font-size:16px;line-height:1.9;color:rgba(245,240,232,0.75);margin-bottom:20px;}
+  .section p:last-child{margin-bottom:0;}
+  .section p strong{color:var(--off-white);font-weight:500;}
+  .section p em{font-style:italic;color:var(--module-color);}
+  .hook{background:rgba(255,255,255,0.02);border-left:3px solid var(--module-color);padding:32px 36px;}
+  .hook p{font-family:'Playfair Display',serif;font-size:20px;line-height:1.6;color:rgba(245,240,232,0.85);margin-bottom:16px;}
+  .hook p:last-child{margin-bottom:0;}
+  .insight-box{background:var(--card);border:1px solid var(--border);padding:32px;margin:24px 0;}
+  .insight-box p{font-size:16px;line-height:1.85;color:rgba(245,240,232,0.7);margin-bottom:16px;}
+  .insight-box p:last-child{margin-bottom:0;}
+  .insight-box strong{color:var(--module-color);font-weight:500;}
+  .reality-box{background:rgba(200,57,43,0.06);border:1px solid rgba(200,57,43,0.2);padding:32px;}
+  .reality-box p{font-size:17px;line-height:1.8;color:rgba(245,240,232,0.85);margin-bottom:16px;}
+  .reality-box p:last-child{margin-bottom:0;}
+  .reality-box strong{color:var(--off-white);font-weight:600;}
+  .action-block{margin-bottom:40px;}
+  .action-label{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--module-color);border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:12px;margin-bottom:24px;}
+  .action-item{display:flex;gap:20px;margin-bottom:24px;align-items:flex-start;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .action-item:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+  .action-num{width:32px;height:32px;border:1px solid var(--module-color);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--module-color);flex-shrink:0;}
+  .action-item div{font-size:16px;color:rgba(245,240,232,0.75);line-height:1.75;}
+  .action-item strong{color:var(--off-white);font-weight:500;}
+  .action-item em{font-style:italic;color:rgba(245,240,232,0.9);}
+  .exercise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+  .exercise-card{background:var(--card);border:1px solid var(--border);padding:28px 24px;}
+  .exercise-title{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--off-white);margin-bottom:12px;}
+  .exercise-card p{font-size:14px;color:var(--muted);line-height:1.7;}
+  .reframe-list{display:flex;flex-direction:column;gap:0;}
+  .reframe{padding:28px 0;border-bottom:1px solid var(--border);}
+  .reframe:last-child{border-bottom:none;}
+  .reframe-old{font-size:15px;color:rgba(200,57,43,0.7);margin-bottom:10px;font-style:italic;}
+  .reframe-new{font-size:16px;color:rgba(245,240,232,0.8);line-height:1.7;}
+  .reframe-new em{font-style:italic;color:var(--module-color);}
+  .closing{background:linear-gradient(135deg,rgba(212,168,83,0.06),rgba(200,57,43,0.04));border:1px solid rgba(212,168,83,0.2);padding:48px 40px;text-align:center;margin-top:80px;position:relative;}
+  .closing::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .closing p{font-size:18px;color:rgba(245,240,232,0.8);line-height:1.8;margin-bottom:16px;font-family:'Playfair Display',serif;}
+  .closing p strong{color:var(--off-white);font-weight:700;}
+  .closing-line{font-size:24px;font-weight:700;font-style:italic;color:var(--module-color) !important;margin-top:8px;}
+  .module-nav{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:80px;}
+  .module-nav-btn{background:var(--card);border:1px solid var(--border);padding:24px 28px;text-decoration:none;display:block;transition:all 0.2s;}
+  .module-nav-btn:hover{border-color:var(--module-color);}
+  .module-nav-btn.next{text-align:right;}
+  .nav-direction{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .nav-title{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--off-white);}
+  @media(max-width:768px){nav{padding:16px 20px;}.module-hero{padding:60px 20px 40px;}.content{padding:40px 20px 80px;}.exercise-grid{grid-template-columns:1fr;}.module-nav{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav>
+  <a href="course-home.html" class="nav-logo">The Connection Course</a>
+  <a href="course-home.html" class="nav-back">← All Modules</a>
+</nav>
+<div class="module-hero">
+  <div class="module-eyebrow">Module 6 of 6 · The Natural</div>
+  <h1>You're good at this. <em>Now go deeper.</em></h1>
+  <div class="module-subtitle">Dating isn't your problem. Real connection is the next level.</div>
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+</div>
+<div class="content">
+<div class="section"><div class="hook"><p>You're here because dating isn't the problem. Dates happen. Attraction exists. People are drawn to you and you know it.</p><p>But something is still missing. Maybe the relationships don't last. Maybe the people you attract aren't the ones you actually want. Maybe you've never had a relationship that went all the way — deep, committed, lasting.</p><p>You've mastered the game. Now you need to learn what comes after the game ends.</p></div></div>
+<div class="section"><h2>The Deep Problem</h2><p>The Natural's challenge is unique — and often invisible. Because from the outside, everything looks fine. You're confident, attractive, socially skilled. You get dates. People like you.</p><p>But confidence in the early stages of attraction is not the same as capability in the later stages of connection. Early attraction is driven by presence, confidence, mystery, energy. The Natural has all of these. But <strong>lasting connection is driven by something different</strong> — vulnerability, consistency, depth, the willingness to let someone fully know you and stay anyway.</p></div>
+<div class="section"><h2>The Psychology</h2><div class="insight-box"><p>Relationships have developmental stages. The early stage — attraction, pursuit, early connection — rewards confident, slightly scarce, energetic presence. The Natural excels here.</p><p>The middle and later stages — commitment, depth, genuine intimacy — reward something different: <strong>consistency, vulnerability, the ability to stay when things get ordinary.</strong></p><p>Many Naturals unconsciously exit relationships at the transition point between these stages — not because they don't want more, but because the skills required change and they haven't developed the second set. This is also related to <strong>avoidant attachment</strong> — where confidence in early attraction unconsciously creates distance as real intimacy increases.</p></div></div>
+<div class="section"><h2>The Reality Check</h2><div class="reality-box"><p>You've been winning the early game. That's real. Now you need to decide whether you actually want to play the full one.</p><p>The full game requires things the early game doesn't. It requires being seen imperfectly. It requires staying when it's not exciting. It requires choosing someone, day after day, even when the choosing is hard.</p><p><strong>Are you ready for that version?</strong></p></div></div>
+<div class="section"><h2>Action Plan</h2>
+<div class="action-block"><div class="action-label">Tomorrow</div>
+<div class="action-item"><div class="action-num">1</div><div><strong>Be less curated.</strong> In one interaction today, be slightly less polished than usual. Say something unfiltered. Admit to something imperfect. Let someone see you slightly off your game. Notice that they don't run.</div></div>
+<div class="action-item"><div class="action-num">2</div><div><strong>Ask a real question.</strong> Ask someone something you actually want to know the answer to. Not small talk. Something real. Then actually listen.</div></div>
+<div class="action-item"><div class="action-num">3</div><div><strong>Reflect on your pattern.</strong> Think about your last two or three relationships. Where did they end? What were you doing — or not doing — that contributed? Get honest.</div></div>
+</div>
+<div class="action-block"><div class="action-label">This Week</div>
+<div class="action-item"><div class="action-num">1</div><div><strong>Go deeper with someone you already know.</strong> Pick a person in your life and have a genuinely deep conversation. Not about surface things. About something real. Practice the muscle of depth in a context where the stakes are low.</div></div>
+<div class="action-item"><div class="action-num">2</div><div><strong>Be consistent.</strong> Pick something — texting back, showing up when you say you will, following through on plans — and be completely consistent this week. Consistency is one of the most underrated attractive qualities.</div></div>
+<div class="action-item"><div class="action-num">3</div><div><strong>Join something long-term.</strong> Sign up for something that requires you to show up repeatedly over time — a class, a club, a project. The Natural often gravitates toward novelty. Practice commitment to something ordinary.</div></div>
+</div>
+<div class="action-block"><div class="action-label">This Month</div><p style="color:var(--muted);font-size:16px;line-height:1.8;">Shift your focus from creating attraction to building connection. Ask more questions. Share more of yourself. Stay in situations that have moved past exciting and into real. The relationships worth having are built on what comes after the early rush — the choice to keep showing up.</p></div>
+</div>
+<div class="section"><h2>Courage Exercises</h2><div class="exercise-grid">
+<div class="exercise-card"><div class="exercise-title">The Imperfect Moment</div><p>Let yourself be seen imperfectly in one interaction per day. Not performing confidence. Just being human.</p></div>
+<div class="exercise-card"><div class="exercise-title">The Long Conversation</div><p>Have one long, unrushed, genuinely deep conversation this week. No agenda. No impression management. Just two people talking about real things.</p></div>
+<div class="exercise-card"><div class="exercise-title">The Commitment Practice</div><p>Make one commitment this week — to a person, to a plan, to an activity — and keep it without exception. Feel what it means to be someone who does what they say.</p></div>
+</div></div>
+<div class="section"><h2>Reframing Your Beliefs</h2><div class="reframe-list">
+<div class="reframe"><div class="reframe-old">❌ "I just haven't met the right person yet."</div><div class="reframe-new">✓ Possibly. But the right person, when they arrive, will require more than your early-stage skills. <em>Start developing the later-stage ones now.</em></div></div>
+<div class="reframe"><div class="reframe-old">❌ "Relationships shouldn't be this much work."</div><div class="reframe-new">✓ Good relationships require effort — not drama — but genuine, consistent, chosen effort. The ones that seem effortless from the outside are deeply intentional from the inside.</div></div>
+<div class="reframe"><div class="reframe-old">❌ "I'm better on my own."</div><div class="reframe-new">✓ Maybe. Or maybe independence has become a comfortable story that keeps you from the vulnerability of actually being with someone fully.</div></div>
+</div></div>
+<div class="closing"><p>You've earned the confidence you carry. That's real.</p><p>Now earn the depth.</p><p>The people who have both — magnetic and genuine, attractive and intimate, confident and vulnerable — those are the people who build the kind of relationships most people only dream about.</p><p><strong>That's who you're becoming.</strong></p><p class="closing-line">Keep going.</p></div>
+  <div class="module-nav">
+    <a href="module-disconnected.html" class="module-nav-btn prev"><div class="nav-direction">← Previous</div><div class="nav-title">Module 5: The Disconnected</div></a>
+    <a href="course-home.html" class="module-nav-btn next" style="background:rgba(212,168,83,0.08);border-color:rgba(212,168,83,0.3);"><div class="nav-direction">Course Complete ✓</div><div class="nav-title">Back to Course Home</div></a>
+  </div>
+</div>
+<script>
+  if (sessionStorage.getItem('courseAccess') !== 'granted') { window.location.href = 'course-home.html'; }
+</script>
+</body>
+</html>

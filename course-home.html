@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Connection Course — Coach John Gagiu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f0e8;
+    --accent: #c8392b;
+    --gold: #d4a853;
+    --muted: #7a7060;
+    --card: #141414;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+
+  .grain { position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.5; }
+
+  /* PASSWORD GATE */
+  #gate {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: radial-gradient(ellipse at 50% 50%, rgba(200,57,43,0.06) 0%, transparent 70%);
+  }
+
+  .gate-card {
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gate-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 48px;
+    letter-spacing: 0.05em;
+  }
+
+  .gate-lock {
+    font-size: 40px;
+    margin-bottom: 28px;
+    opacity: 0.6;
+  }
+
+  .gate-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .gate-card h1 em { font-style: italic; color: var(--gold); }
+
+  .gate-card p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .gate-input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 16px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: var(--off-white);
+    letter-spacing: 0.15em;
+    text-align: center;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .gate-input:focus { border-color: var(--gold); }
+  .gate-input::placeholder { letter-spacing: 0.05em; color: var(--muted); }
+
+  .gate-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
+  }
+
+  .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,57,43,0.35); }
+
+  .gate-error {
+    font-size: 13px;
+    color: var(--accent);
+    display: none;
+    margin-top: 8px;
+  }
+
+  .gate-help {
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    margin-top: 24px;
+  }
+
+  /* COURSE CONTENT */
+  #course { display: none; }
+
+  nav {
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .nav-badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #27ae60;
+    border: 1px solid rgba(39,174,96,0.3);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  /* HERO */
+  .course-hero {
+    padding: 80px 48px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .welcome-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .welcome-tag::before, .welcome-tag::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .course-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+
+  .course-hero h1 em { font-style: italic; color: var(--gold); }
+
+  .course-hero p {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* MODULES GRID */
+  .modules-section {
+    padding: 20px 48px 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .module-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .module-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--module-color, var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .module-card:hover { background: rgba(255,255,255,0.03); }
+  .module-card:hover::before { transform: scaleX(1); }
+
+  .module-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+  }
+
+  .module-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--module-color);
+    margin-bottom: 16px;
+  }
+
+  .module-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--module-color);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .module-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--off-white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .module-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+
+  .module-link {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--module-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* START HERE */
+  .start-section {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 48px;
+    margin-bottom: 60px;
+  }
+
+  .start-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .start-inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .start-inner h2 em { font-style: italic; color: var(--gold); }
+
+  .start-inner p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .start-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .start-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(212,168,83,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text {
+    font-size: 15px;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.6;
+  }
+
+  .step-text strong { color: var(--off-white); font-weight: 500; }
+
+  /* COACHING CTA */
+  .coaching-cta {
+    max-width: 1100px;
+    margin: 0 auto 100px;
+    padding: 0 48px;
+  }
+
+  .coaching-banner {
+    background: linear-gradient(135deg, rgba(212,168,83,0.08), rgba(200,57,43,0.05));
+    border: 1px solid rgba(212,168,83,0.25);
+    padding: 48px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .coaching-banner::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .coaching-banner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .coaching-banner h3 em { font-style: italic; color: var(--gold); }
+
+  .coaching-banner p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .coaching-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    padding: 16px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .coaching-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,57,43,0.35); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .course-hero { padding: 60px 20px 40px; }
+    .modules-section { padding: 20px 20px 80px; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .start-section { padding: 48px 20px; }
+    .start-inner { grid-template-columns: 1fr; gap: 36px; }
+    .coaching-cta { padding: 0 20px; }
+    .coaching-banner { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">Coach John Gagiu</div>
+    <div class="gate-lock">🔐</div>
+    <h1>The <em>Connection</em><br>Course</h1>
+    <p>Enter your access password to unlock your course. You received this when you purchased.</p>
+    <input type="password" class="gate-input" id="passwordInput" placeholder="Enter password" onkeydown="if(event.key==='Enter') checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()">Access My Course →</button>
+    <div class="gate-error" id="gateError">Incorrect password. Please check your email.</div>
+    <p class="gate-help">Need help? WhatsApp: <a href="https://wa.me/447455264387" style="color:var(--muted);">+44 7455 264387</a></p>
+  </div>
+</div>
+
+<!-- COURSE CONTENT -->
+<div id="course">
+  <nav>
+    <div class="nav-logo">The Connection Course</div>
+    <div class="nav-badge">✓ Full Access</div>
+  </nav>
+
+  <div class="course-hero">
+    <div class="welcome-tag">Welcome</div>
+    <h1>You're in.<br>Now let's <em>fix it.</em></h1>
+    <p>Six modules. One per pattern. Start with yours — the one that matches your diagnosis result — then work through the rest. You'll recognise yourself in more than one.</p>
+  </div>
+
+  <div class="start-section">
+    <div class="start-inner">
+      <div>
+        <h2>How to get the <em>most</em> from this course</h2>
+        <p>This isn't a passive read. It's a working document. Go through your module slowly. Do the exercises. Take the action plan seriously. Come back to it after a week and see what's changed.</p>
+      </div>
+      <div class="start-steps">
+        <div class="start-step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Start with your result type.</strong> Go straight to the module that matches your diagnosis.</div>
+        </div>
+        <div class="start-step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Read it fully.</strong> Don't skim. The depth is the point.</div>
+        </div>
+        <div class="start-step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Do the action plan.</strong> Tomorrow. This week. This month.</div>
+        </div>
+        <div class="start-step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Read the other modules.</strong> You'll find pieces of yourself in all of them.</div>
+        </div>
+        <div class="start-step">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Get support if you need it.</strong> Coaching is available below.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modules-section">
+    <div class="section-label">Your 6 Modules</div>
+    <div class="modules-grid">
+
+      <a class="module-card" href="module-invisible.html" style="--module-color: #e74c3c;">
+        <div class="module-num">1</div>
+        <div class="module-dot" style="background:#e74c3c;"></div>
+        <span class="module-tag">The Invisible</span>
+        <div class="module-title">You're not being seen.</div>
+        <p class="module-desc">Your signals read as friendly, not attracted. This module shows you exactly how to change that — without changing who you are.</p>
+        <div class="module-link">Start Module 1 →</div>
+      </a>
+
+      <a class="module-card" href="module-friendzoner.html" style="--module-color: #e67e22;">
+        <div class="module-num">2</div>
+        <div class="module-dot" style="background:#e67e22;"></div>
+        <span class="module-tag">The Friend-Zoner</span>
+        <div class="module-title">Connection without attraction.</div>
+        <p class="module-desc">You're warm, likeable, genuine. But warmth without tension isn't romance. This module teaches you the difference.</p>
+        <div class="module-link">Start Module 2 →</div>
+      </a>
+
+      <a class="module-card" href="module-overthinker.html" style="--module-color: #f39c12;">
+        <div class="module-num">3</div>
+        <div class="module-dot" style="background:#f39c12;"></div>
+        <span class="module-tag">The Overthinker</span>
+        <div class="module-title">Your mind is too loud.</div>
+        <p class="module-desc">You're intelligent and self-aware. But your brain is working against you. This module helps you get out of your head and into the moment.</p>
+        <div class="module-link">Start Module 3 →</div>
+      </a>
+
+      <a class="module-card" href="module-almostthere.html" style="--module-color: #27ae60;">
+        <div class="module-num">4</div>
+        <div class="module-dot" style="background:#27ae60;"></div>
+        <span class="module-tag">The Almost-There</span>
+        <div class="module-title">One shift from everything changing.</div>
+        <p class="module-desc">Dates happen. Attraction exists. But it never becomes something real. This module finds the exact moment you stall — and helps you push through it.</p>
+        <div class="module-link">Start Module 4 →</div>
+      </a>
+
+      <a class="module-card" href="module-disconnected.html" style="--module-color: #95a5a6;">
+        <div class="module-num">5</div>
+        <div class="module-dot" style="background:#95a5a6;"></div>
+        <span class="module-tag">The Disconnected</span>
+        <div class="module-title">Surface is easy. Depth is hard.</div>
+        <p class="module-desc">You're charming and likeable. But when things get real, you pull back. This module is about learning to be known — not just liked.</p>
+        <div class="module-link">Start Module 5 →</div>
+      </a>
+
+      <a class="module-card" href="module-natural.html" style="--module-color: #8e44ad;">
+        <div class="module-num">6</div>
+        <div class="module-dot" style="background:#8e44ad;"></div>
+        <span class="module-tag">The Natural</span>
+        <div class="module-title">Good at dating. Now go deeper.</div>
+        <p class="module-desc">Dating comes easily. But something real and lasting hasn't happened. This module takes you from attraction to genuine, lasting connection.</p>
+        <div class="module-link">Start Module 6 →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="coaching-cta">
+    <div class="coaching-banner">
+      <div>
+        <h3>Want <em>personal support</em> while you work through this?</h3>
+        <p>£10 per question · £30/week unlimited support · £100–£200 for a 1:1 call. Coach John works directly with you on your specific situation.</p>
+      </div>
+      <a href="https://wa.me/447455264387?text=Hi%20Coach%20John%2C%20I%27ve%20just%20started%20the%20Connection%20Course%20and%20I%27d%20like%20some%20support" class="coaching-btn">Get Support →</a>
+    </div>
+  </div>
+
+  <footer>© 2025 Coach John Gagiu · The Connection Course · For personal use only — please do not share your access</footer>
+</div>
+
+<script>
+  // Password — you can change this to whatever you want
+  const COURSE_PASSWORD = 'connection2025';
+
+  function checkPassword() {
+    const input = document.getElementById('passwordInput').value.trim().toLowerCase();
+    const error = document.getElementById('gateError');
+
+    if (input === COURSE_PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('course').style.display = 'block';
+      sessionStorage.setItem('courseAccess', 'granted');
+      window.scrollTo(0, 0);
+    } else {
+      error.style.display = 'block';
+      document.getElementById('passwordInput').style.borderColor = '#c8392b';
+    }
+  }
+
+  // Check if already authenticated this session
+  if (sessionStorage.getItem('courseAccess') === 'granted') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('course').style.display = 'block';
+  }
+</script>
+</body>
+</html>
