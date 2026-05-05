@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Connection Course — Coach John</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --off-white: #f5f0e8;
+    --warm: #e8dcc8;
+    --accent: #c8392b;
+    --gold: #d4a853;
+    --muted: #7a7060;
+    --card: #111111;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8,8,8,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* SECTIONS */
+  section { padding: 100px 48px; }
+
+  .inner { max-width: 900px; margin: 0 auto; }
+  .inner-wide { max-width: 1100px; margin: 0 auto; }
+  .inner-narrow { max-width: 680px; margin: 0 auto; }
+
+  /* LABELS */
+  .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .label-center {
+    justify-content: center;
+  }
+
+  .label-center::before, .label-center::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  /* TYPOGRAPHY */
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.02;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  em { font-style: italic; color: var(--gold); }
+
+  .lead {
+    font-size: 19px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.7);
+  }
+
+  .body-text {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.65);
+  }
+
+  /* DIVIDERS */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 20px 48px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(200,57,43,0.45);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    background: transparent;
+    color: var(--off-white);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 18px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ═══ HERO ═══ */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(200,57,43,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(212,168,83,0.04) 0%, transparent 50%);
+  }
+
+  .hero-number {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 320px;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(255,255,255,0.015);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.75;
+    max-width: 580px;
+    margin: 32px 0 52px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .hero-price {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .hero-price strong {
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .hero-price s {
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ═══ PROBLEM ═══ */
+  #problem {
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .problem-statement {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1.35;
+    font-weight: 700;
+    border-left: 2px solid var(--accent);
+    padding-left: 28px;
+    margin-bottom: 40px;
+  }
+
+  .truth-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .truth-list li {
+    display: flex;
+    gap: 18px;
+    font-size: 16px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.65;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .truth-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .truth-icon {
+    color: var(--accent);
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ═══ EMOTIONAL BRIDGE ═══ */
+  #bridge {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bridge-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 46px);
+    line-height: 1.3;
+    font-weight: 700;
+    font-style: italic;
+    max-width: 760px;
+    margin: 0 auto 40px;
+  }
+
+  .bridge-quote::before {
+    content: '"';
+    display: block;
+    font-size: 120px;
+    line-height: 0.7;
+    color: rgba(212,168,83,0.15);
+    margin-bottom: 20px;
+  }
+
+  /* ═══ 6 TYPES ═══ */
+  #types { padding-bottom: 60px; }
+
+  .types-intro {
+    max-width: 680px;
+    margin-bottom: 64px;
+  }
+
+  .types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .type-card {
+    background: var(--card);
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .type-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--type-color, var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .type-card:hover::before { transform: scaleX(1); }
+  .type-card:hover { background: rgba(255,255,255,0.03); }
+
+  .type-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--type-color);
+    margin-bottom: 20px;
+  }
+
+  .type-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 8px;
+    color: var(--off-white);
+  }
+
+  .type-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--type-color);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .type-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ═══ WHAT YOU LEARN ═══ */
+  #learn {
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .learn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .learn-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .learn-list li {
+    display: flex;
+    gap: 16px;
+    font-size: 16px;
+    color: rgba(245,240,232,0.8);
+    line-height: 1.6;
+    align-items: flex-start;
+  }
+
+  .check {
+    color: var(--gold);
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 3px;
+  }
+
+  /* ═══ PRICING ═══ */
+  #pricing { text-align: center; }
+
+  .price-card {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid rgba(212,168,83,0.3);
+    padding: 56px 64px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    margin-top: 56px;
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .price-was {
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+
+  .price-now {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .price-what {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    letter-spacing: 0.05em;
+  }
+
+  .price-includes {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .price-includes li {
+    display: flex;
+    gap: 12px;
+    font-size: 15px;
+    color: rgba(245,240,232,0.8);
+    align-items: flex-start;
+  }
+
+  .price-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.25);
+    margin-top: 20px;
+  }
+
+  /* ═══ OBJECTIONS ═══ */
+  #objections {
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .objection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 56px;
+  }
+
+  .objection {
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .objection:last-child { border-bottom: none; }
+
+  .objection-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.4;
+  }
+
+  .objection-a {
+    font-size: 16px;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.8;
+  }
+
+  /* ═══ FINAL PUSH ═══ */
+  #final {
+    text-align: center;
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(200,57,43,0.07) 0%, transparent 70%);
+  }
+
+  .final-inner {
+    position: relative;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .final-line {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+
+  .final-body {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 52px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    section { padding: 70px 20px; }
+    .hero-inner { padding: 0 20px; }
+    .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+    .types-grid { grid-template-columns: 1fr; }
+    .learn-grid { grid-template-columns: 1fr; gap: 48px; }
+    .price-card { padding: 40px 28px; }
+    .objection { grid-template-columns: 1fr; gap: 16px; }
+    footer { padding: 24px 20px; }
+    .hero-number { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Coach John</div>
+  <a href="#pricing" class="nav-cta">Join — £47</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-number">6</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">The Connection Course</div>
+    <h1>You don't have<br>a dating problem.<br>You have a <em>pattern.</em></h1>
+    <p class="hero-sub">
+      Most people spend years repeating the same mistakes in dating — invisible, friend-zoned, overthinking, almost-there, disconnected. Not because they're not enough. Because nobody ever showed them what's actually going wrong.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#pricing" class="btn-primary">Fix It Now →</a>
+      <div class="hero-price">
+        <s>£97</s> → <strong>£47</strong><br>
+        <span style="font-size:12px;">6 modules · Lifetime access · Start today</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ PROBLEM ═══ -->
+<section id="problem">
+  <div class="inner-wide">
+    <div class="label">The real problem</div>
+    <div class="problem-grid">
+      <div>
+        <div class="problem-statement">
+          People say they can't find someone.<br>But they don't socialise.
+        </div>
+        <p class="body-text">
+          Here's what nobody wants to say out loud: most people who struggle with dating are not struggling because of their looks, their income, or their personality. They're struggling because they've stopped putting themselves in situations where connection is even possible.<br><br>
+          They swipe instead of showing up. They text instead of talking. They wait to feel confident before they act — not realising that confidence is built through action, not the prerequisite for it.<br><br>
+          The world has moved online. Real-world interaction feels awkward now. Approaching someone, introducing yourself, starting a genuine conversation — these things feel harder than they should. And so people stop doing them.<br><br>
+          And then they wonder why they're alone.
+        </p>
+      </div>
+      <div>
+        <ul class="truth-list">
+          <li>
+            <span class="truth-icon">—</span>
+            <span>You haven't talked to a stranger in weeks. Not because you can't. Because modern life has made it unnecessary — and uncomfortable.</span>
+          </li>
+          <li>
+            <span class="truth-icon">—</span>
+            <span>Every romantic interaction feels too high-stakes because you're not having enough of them. Volume reduces pressure. Isolation amplifies it.</span>
+          </li>
+          <li>
+            <span class="truth-icon">—</span>
+            <span>You're waiting to meet someone organically — but you go to work, go home, and scroll. That's not organic. That's isolation with wifi.</span>
+          </li>
+          <li>
+            <span class="truth-icon">—</span>
+            <span>The people who find connection are not luckier than you. They go places. They talk to people. They tolerate the discomfort of being new somewhere.</span>
+          </li>
+          <li>
+            <span class="truth-icon">—</span>
+            <span>Courage is a muscle. You've been resting it. This course makes you use it again.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BRIDGE ═══ -->
+<section id="bridge">
+  <div class="inner-narrow">
+    <div class="bridge-quote">
+      The version of you that people fall for already exists. You just haven't been showing them.
+    </div>
+    <p class="body-text" style="text-align:center; max-width:520px; margin:0 auto 40px;">
+      This isn't about becoming someone new. It's about understanding the specific pattern that's been getting in your way — and replacing it with something that actually works.
+    </p>
+    <div style="text-align:center;">
+      <a href="#types" class="btn-ghost">Find Your Pattern →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ 6 TYPES ═══ -->
+<section id="types">
+  <div class="inner-wide">
+    <div class="label">The 6 patterns</div>
+    <div class="types-intro">
+      <h2>Every struggle in dating<br>comes back to <em>one of six things.</em></h2>
+      <p class="lead" style="margin-top:20px;">The Connection Course is built around all six — so wherever you are, there's a module built specifically for you.</p>
+    </div>
+    <div class="types-grid">
+
+      <div class="type-card" style="--type-color: #e74c3c;">
+        <div class="type-dot" style="background:#e74c3c;"></div>
+        <div class="type-name">The Invisible</div>
+        <span class="type-tag">Pattern: Visibility</span>
+        <p class="type-desc">You're not being seen romantically — not because you're not worth it, but because the signals you're sending read as friendly, not attracted. This module teaches you to change that without becoming someone you're not.</p>
+      </div>
+
+      <div class="type-card" style="--type-color: #e67e22;">
+        <div class="type-dot" style="background:#e67e22;"></div>
+        <div class="type-name">The Friend-Zoner</div>
+        <span class="type-tag">Pattern: Tension</span>
+        <p class="type-desc">You create warmth but not attraction. Connection but not desire. You're everyone's favourite person — just not their first romantic choice. This module shows you the exact dynamic that's missing, and how to introduce it.</p>
+      </div>
+
+      <div class="type-card" style="--type-color: #f39c12;">
+        <div class="type-dot" style="background:#f39c12;"></div>
+        <div class="type-name">The Overthinker</div>
+        <span class="type-tag">Pattern: Anxiety</span>
+        <p class="type-desc">Your brain is working against you. You're monitoring, scripting, replaying — and missing the actual moment. This module helps you get out of your head and into genuine presence, where real attraction lives.</p>
+      </div>
+
+      <div class="type-card" style="--type-color: #27ae60;">
+        <div class="type-dot" style="background:#27ae60;"></div>
+        <div class="type-name">The Almost-There</div>
+        <span class="type-tag">Pattern: The Final Step</span>
+        <p class="type-desc">Dates happen, attraction exists — but it never quite becomes something real. You're one specific shift away from everything changing. This module finds that shift and helps you make it.</p>
+      </div>
+
+      <div class="type-card" style="--type-color: #95a5a6;">
+        <div class="type-dot" style="background:#95a5a6;"></div>
+        <div class="type-name">The Disconnected</div>
+        <span class="type-tag">Pattern: Depth</span>
+        <p class="type-desc">Surface is easy. You're charming, confident, likeable. But when it gets real — when someone tries to go deeper — you lock up. This module is about learning to be known, not just liked.</p>
+      </div>
+
+      <div class="type-card" style="--type-color: #8e44ad;">
+        <div class="type-dot" style="background:#8e44ad;"></div>
+        <div class="type-name">The Natural</div>
+        <span class="type-tag">Pattern: Depth over Attraction</span>
+        <p class="type-desc">Dating comes easily. But something real and lasting hasn't happened yet. This module is about moving from being great at attraction to being capable of genuine, lasting connection.</p>
+      </div>
+
+    </div>
+    <p style="margin-top:32px; font-size:14px; color:var(--muted); text-align:center;">
+      Not sure which one you are? <a href="https://dating-diagnosis.netlify.app" style="color:var(--gold); text-decoration:none;">Take the £3 diagnosis test →</a>
+    </p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ WHAT YOU LEARN ═══ -->
+<section id="learn">
+  <div class="inner-wide">
+    <div class="label">What's inside</div>
+    <div class="learn-grid">
+      <div>
+        <h2>Everything you need.<br><em>Nothing you don't.</em></h2>
+        <p class="body-text" style="margin-top:24px;">
+          Each module is built around one pattern. Long, deep, practical — not a ten-minute video with a motivational background. Real content that treats you like an adult and gives you actual tools.
+        </p>
+        <p class="body-text" style="margin-top:16px;">
+          Every module includes psychology, honesty, and a step-by-step action plan — including real-world socialising tasks that build courage, connection, and a life where meeting people is actually possible.
+        </p>
+      </div>
+      <div>
+        <ul class="learn-list">
+          <li><span class="check">✓</span> Why your specific pattern formed — and the psychology behind it</li>
+          <li><span class="check">✓</span> A direct, honest reality check — no comfort, just clarity</li>
+          <li><span class="check">✓</span> What to do tomorrow, this week, and this month</li>
+          <li><span class="check">✓</span> Real-world socialising tasks — salsa, language exchange, talking to strangers</li>
+          <li><span class="check">✓</span> Courage-building exercises for people who've been playing it safe</li>
+          <li><span class="check">✓</span> Belief reframes that are actually grounded — not just "believe in yourself"</li>
+          <li><span class="check">✓</span> A closing message you'll want to come back to</li>
+          <li><span class="check">✓</span> Access to coaching and accountability support</li>
+          <li><span class="check">✓</span> All 6 modules — because patterns overlap and you'll recognise yourself in more than one</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <div class="inner">
+    <div class="label label-center" style="justify-content:center;">
+      <span>Investment</span>
+    </div>
+    <h2 style="text-align:center;">One decision.<br><em>Everything changes.</em></h2>
+
+    <div style="text-align:center;">
+      <div class="price-card">
+        <div class="price-was">Usually £97</div>
+        <div class="price-now">£47</div>
+        <div class="price-what">The Connection Course · Full Access</div>
+        <ul class="price-includes">
+          <li><span class="check">✓</span> All 6 modules (one per pattern type)</li>
+          <li><span class="check">✓</span> Full action plans — daily, weekly, monthly</li>
+          <li><span class="check">✓</span> Real-world socialising tasks included</li>
+          <li><span class="check">✓</span> Courage exercises & belief reframes</li>
+          <li><span class="check">✓</span> Lifetime access — revisit anytime</li>
+          <li><span class="check">✓</span> Option to add coaching & accountability</li>
+        </ul>
+        <a href="#" class="btn-primary" style="width:100%; text-align:center; display:block;">Join the Course Now →</a>
+        <p class="price-note">One-time payment · Instant access · No subscription</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ OBJECTIONS ═══ -->
+<section id="objections">
+  <div class="inner">
+    <div class="label">Honest answers</div>
+    <h2>You might be thinking…</h2>
+    <div class="objection-list">
+
+      <div class="objection">
+        <div class="objection-q">"I've tried self-improvement stuff before and it doesn't work."</div>
+        <div class="objection-a">Most self-improvement content is generic. "Be confident." "Love yourself." "Just put yourself out there." This isn't that. This is built around your specific pattern — the exact dynamic that's been getting in your way. Generic advice fails because it doesn't address the actual problem. This does.</div>
+      </div>
+
+      <div class="objection">
+        <div class="objection-q">"£47 seems like a lot for something digital."</div>
+        <div class="objection-a">You've spent more than £47 on a night out that changed nothing. This is content that, if you actually use it, could change the entire trajectory of your romantic life. The question isn't whether it's expensive. It's whether staying where you are is more expensive.</div>
+      </div>
+
+      <div class="objection">
+        <div class="objection-q">"I'm just unlucky. The right person hasn't come along."</div>
+        <div class="objection-a">Maybe. But if the right person walked into your life tomorrow — would you know what to do? Would you avoid the patterns that have cost you before? Luck favours the prepared. Get prepared.</div>
+      </div>
+
+      <div class="objection">
+        <div class="objection-q">"I don't have time right now."</div>
+        <div class="objection-a">You have lifetime access. There's no deadline. Start when you're ready. But ask yourself honestly: when is "right now" going to become the right time? Most people wait for perfect conditions that never come. The course will be here. So will your patterns, if you don't address them.</div>
+      </div>
+
+      <div class="objection">
+        <div class="objection-q">"What if it doesn't work for me?"</div>
+        <div class="objection-a">Then you'll have spent £47 finding that out. But here's what's more likely: you'll recognise yourself on every page, you'll have a clearer understanding of your patterns than you've ever had, and you'll have practical tools you can start using immediately. That's not nothing. That's a lot.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL ═══ -->
+<section id="final">
+  <div class="final-bg"></div>
+  <div class="final-inner">
+    <div class="label label-center" style="justify-content:center; margin-bottom:32px;">
+      <span>The decision</span>
+    </div>
+    <div class="final-line">
+      Stop almost.<br>Start <em>actually.</em>
+    </div>
+    <p class="final-body">
+      You've been close. You've had the connections that almost became something. You've felt the attraction that faded before it turned into anything real. You know what it's like to be right there — and then not.<br><br>
+      You don't have to keep living in almost.<br><br>
+      The pattern is identifiable. It's understandable. And it's fixable.<br><br>
+      £47. Right now. Let's fix it.
+    </p>
+    <a href="#pricing" class="btn-primary" style="font-size:16px; padding:22px 56px;">Join the Course → £47</a>
+    <p style="margin-top:24px; font-size:13px; color:rgba(255,255,255,0.2);">One-time · Instant access · Lifetime</p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Coach John · The Connection Course · All rights reserved
+</footer>
+
+</body>
+</html>
