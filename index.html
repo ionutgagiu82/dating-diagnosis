@@ -2,7 +2,1490 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why You're Not Getting Dates — Find Out Now</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f0e8;
+    --warm: #e8dcc8;
+    --accent: #c8392b;
+    --accent2: #d4a853;
+    --muted: #7a7060;
+    --card: #141414;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── LANDING PAGE ─── */
+  #landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  .nav {
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--accent2);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  .hero {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 48px;
+    align-items: center;
+  }
+
+  .hero-left {
+    padding-right: 80px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.05;
+    font-weight: 900;
+    margin-bottom: 28px;
+    color: var(--off-white);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  .hero-body {
+    font-size: 17px;
+    line-height: 1.75;
+    color: rgba(245, 240, 232, 0.65);
+    margin-bottom: 48px;
+    max-width: 440px;
+  }
+
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .cta-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,57,43,0.4); }
+  .cta-btn:hover::after { opacity: 0.08; }
+
+  .cta-sub {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price-tag {
+    background: rgba(212,168,83,0.15);
+    color: var(--accent2);
+    border: 1px solid rgba(212,168,83,0.3);
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .hero-right {
+    position: relative;
+    height: 500px;
+  }
+
+  .stat-card {
+    position: absolute;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 28px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .stat-card:nth-child(1) { top: 0; right: 0; width: 220px; animation-delay: 0s; }
+  .stat-card:nth-child(2) { top: 50%; left: 0; width: 200px; animation-delay: 2s; transform: translateY(-50%); }
+  .stat-card:nth-child(3) { bottom: 0; right: 60px; width: 240px; animation-delay: 4s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .stat-card:nth-child(2) {
+    animation: float2 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translateY(-50%); }
+    50% { transform: translateY(calc(-50% - 12px)); }
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .big-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    font-style: italic;
+    color: rgba(255,255,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    font-weight: 900;
+  }
+
+  /* problem section */
+  .problem-section {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  h2 em { font-style: italic; color: var(--accent2); }
+
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .problem-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 16px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .problem-list li:last-child { border-bottom: none; }
+
+  .problem-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(200,57,43,0.15);
+    border: 1px solid rgba(200,57,43,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  .result-types {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .result-type-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: border-color 0.2s;
+  }
+
+  .result-type-card:hover { border-color: rgba(212,168,83,0.3); }
+
+  .result-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .result-type-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    margin-bottom: 3px;
+  }
+
+  .result-type-desc {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* how it works */
+  .how-section {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 100px 48px;
+  }
+
+  .how-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 64px;
+    text-align: left;
+  }
+
+  .step {
+    position: relative;
+    padding-top: 16px;
+  }
+
+  .step::before {
+    content: attr(data-num);
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: -24px;
+    left: -8px;
+    line-height: 1;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .step-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* final CTA */
+  .final-cta {
+    padding: 120px 48px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .final-cta h2 { margin-bottom: 20px; }
+  .final-cta p { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 48px; }
+
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 48px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ─── QUIZ ─── */
+  #quiz {
+    display: none;
+    min-height: 100vh;
+    padding: 60px 24px;
+    position: relative;
+  }
+
+  .quiz-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  .back-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--off-white); }
+
+  .progress-wrap {
+    flex: 1;
+    max-width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--accent2);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .q-num {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .question-block {
+    display: none;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .question-block.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    line-height: 1.25;
+    margin-bottom: 40px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .option {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: rgba(245,240,232,0.8);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .option:hover {
+    border-color: rgba(212,168,83,0.5);
+    color: var(--off-white);
+    background: rgba(212,168,83,0.05);
+  }
+
+  .option.selected {
+    border-color: var(--accent2);
+    background: rgba(212,168,83,0.1);
+    color: var(--off-white);
+  }
+
+  .opt-letter {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .option.selected .opt-letter {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: var(--black);
+  }
+
+  .quiz-nav {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .quiz-next {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .quiz-next.visible { opacity: 1; pointer-events: all; }
+  .quiz-next:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,57,43,0.35); }
+
+  /* payment wall */
+  #payment {
+    display: none;
+    min-height: 100vh;
+    padding: 80px 24px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .payment-card {
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 52px;
+    text-align: center;
+  }
+
+  .payment-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+
+  .payment-card h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .payment-card p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .price-display {
+    background: rgba(212,168,83,0.1);
+    border: 1px solid rgba(212,168,83,0.25);
+    padding: 20px;
+    margin-bottom: 32px;
+  }
+
+  .price-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--accent2);
+    line-height: 1;
+  }
+
+  .price-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .pay-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
+  }
+
+  .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,57,43,0.4); }
+
+  .secure-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ─── RESULTS ─── */
+  #results {
+    display: none;
+    min-height: 100vh;
+    padding: 80px 24px;
+  }
+
+  .results-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .result-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .result-type-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    border: 1px solid;
+  }
+
+  .result-header h2 {
+    font-size: clamp(32px, 5vw, 52px);
+    margin-bottom: 16px;
+  }
+
+  .result-header .subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .result-breakdown {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .result-breakdown h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+
+  .result-breakdown p {
+    font-size: 16px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .result-breakdown p:last-child { margin-bottom: 0; }
+
+  .score-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: var(--muted);
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .score-track {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    border-radius: 2px;
+    animation: expandBar 1s ease forwards;
+    animation-delay: 0.3s;
+    width: 0%;
+  }
+
+  @keyframes expandBar {
+    to { width: var(--target); }
+  }
+
+  .score-pct {
+    font-size: 13px;
+    font-weight: 500;
+    width: 36px;
+    text-align: right;
+    color: var(--accent2);
+  }
+
+  .upsell-card {
+    border: 1px solid rgba(212,168,83,0.3);
+    background: linear-gradient(135deg, rgba(212,168,83,0.08), rgba(200,57,43,0.05));
+    padding: 48px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upsell-card::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+  }
+
+  .upsell-badge {
+    display: inline-block;
+    background: var(--accent2);
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    margin-bottom: 24px;
+  }
+
+  .upsell-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .upsell-card p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  .course-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 36px;
+    text-align: left;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .course-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: rgba(245,240,232,0.8);
+  }
+
+  .check {
+    color: var(--accent2);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .upsell-price {
+    margin-bottom: 28px;
+  }
+
+  .upsell-price .was {
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+
+  .upsell-price .now {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--accent2);
+  }
+
+  .course-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 20px 48px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .course-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,57,43,0.4); }
+
+  /* mobile */
+  @media (max-width: 768px) {
+    .nav { padding: 20px 24px; }
+    .hero { grid-template-columns: 1fr; padding: 48px 24px; }
+    .hero-left { padding-right: 0; }
+    .hero-right { display: none; }
+    .problem-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+    .how-section { padding: 60px 24px; }
+    .steps { grid-template-columns: 1fr; gap: 40px; }
+    .final-cta { padding: 80px 24px; }
+    footer { padding: 24px; }
+    .payment-card { padding: 36px 28px; }
+    .result-breakdown { padding: 28px 24px; }
+    .upsell-card { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- ═══════════════════════════════════════
+     LANDING PAGE
+════════════════════════════════════════ -->
+<div id="landing">
+  <nav class="nav">
+    <div class="logo">The Dating Diagnosis</div>
+    <div class="nav-badge">£3 Test · 5 Minutes</div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">The honest truth about dating</div>
+      <h1>You're not unlucky.<br>You're <em>unaware.</em></h1>
+      <p class="hero-body">
+        Most people fail at dating not because they're unattractive or boring — but because they can't see the patterns they're repeating. This test identifies your exact blocker in under 5 minutes.
+      </p>
+      <div class="cta-block">
+        <button class="cta-btn" onclick="startQuiz()">Take the £3 Test →</button>
+        <div class="cta-sub">
+          <span class="price-tag">£3 one-time</span>
+          Instant results · No fluff · Actionable
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="big-line">Why?</div>
+      <div class="stat-card">
+        <div class="stat-num">73%</div>
+        <div class="stat-label">of people repeat the same dating patterns without realising it</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5 min</div>
+        <div class="stat-label">to pinpoint exactly what's blocking you</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1 in 5</div>
+        <div class="stat-label">are stuck in the "almost there" pattern — closest yet most frustrating</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="problem-section">
+    <div>
+      <div class="section-label">Sound familiar?</div>
+      <h2>Dating feels like<br><em>something's missing</em><br>but you can't name it.</h2>
+      <p style="color:var(--muted); font-size:16px; line-height:1.75; margin-top:16px;">
+        It's not about looks. It's not about money. It's about unconscious patterns — and once you see them, you can change them.
+      </p>
+    </div>
+    <div>
+      <ul class="problem-list">
+        <li>
+          <div class="problem-icon">✗</div>
+          <span>Matches and conversations that go nowhere, no matter how much effort you put in</span>
+        </li>
+        <li>
+          <div class="problem-icon">✗</div>
+          <span>Attraction that sparks but fades before anything real develops</span>
+        </li>
+        <li>
+          <div class="problem-icon">✗</div>
+          <span>Feeling confident in life but oddly lost when it comes to dating</span>
+        </li>
+        <li>
+          <div class="problem-icon">✗</div>
+          <span>Being told you're great, but still not getting the dates you want</span>
+        </li>
+        <li>
+          <div class="problem-icon">✗</div>
+          <span>Wondering if everyone else just knows something you don't</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="padding: 20px 48px 80px; max-width:1200px; margin:0 auto;">
+    <div class="section-label" style="margin-bottom:32px;">The 6 dating profiles</div>
+    <div class="result-types">
+      <div class="result-type-card">
+        <div class="result-dot" style="background:#e74c3c;"></div>
+        <div>
+          <div class="result-type-name">The Invisible</div>
+          <div class="result-type-desc">You're not being seen — the signals you're sending are too quiet</div>
+        </div>
+      </div>
+      <div class="result-type-card">
+        <div class="result-dot" style="background:#e67e22;"></div>
+        <div>
+          <div class="result-type-name">The Friend-Zoner</div>
+          <div class="result-type-desc">Attraction exists, but something kills it before it grows</div>
+        </div>
+      </div>
+      <div class="result-type-card">
+        <div class="result-dot" style="background:#f39c12;"></div>
+        <div>
+          <div class="result-type-name">The Overthinker</div>
+          <div class="result-type-desc">Your head is sabotaging what your heart already knows</div>
+        </div>
+      </div>
+      <div class="result-type-card">
+        <div class="result-dot" style="background:#27ae60;"></div>
+        <div>
+          <div class="result-type-name">The Almost-There</div>
+          <div class="result-type-desc">You're close — one shift would change everything</div>
+        </div>
+      </div>
+      <div class="result-type-card">
+        <div class="result-dot" style="background:#7f8c8d;"></div>
+        <div>
+          <div class="result-type-name">The Disconnected</div>
+          <div class="result-type-desc">Surface-level connection is easy, but depth feels impossible</div>
+        </div>
+      </div>
+      <div class="result-type-card">
+        <div class="result-dot" style="background:#8e44ad;"></div>
+        <div>
+          <div class="result-type-name">The Natural</div>
+          <div class="result-type-desc">Dating comes easily — but something real and lasting is still missing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="section-label">How it works</div>
+      <h2>Three steps to<br><em>real clarity</em></h2>
+      <div class="steps">
+        <div class="step" data-num="1">
+          <div class="step-title">Take the Test</div>
+          <div class="step-body">10 honest questions about how you show up in dating situations. No generic advice — this is about you specifically.</div>
+        </div>
+        <div class="step" data-num="2">
+          <div class="step-title">Get Your Result</div>
+          <div class="step-body">Instantly discover which of the 5 dating blockers is holding you back, with a full breakdown of why and how it's affecting you.</div>
+        </div>
+        <div class="step" data-num="3">
+          <div class="step-title">Fix It</div>
+          <div class="step-body">Your result comes with a direct path to the training that addresses your exact blocker — not a generic course, your course.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="final-cta">
+    <div class="eyebrow" style="justify-content:center;">£3. 5 minutes. Real answers.</div>
+    <h2>Stop guessing.<br><em>Start knowing.</em></h2>
+    <p>Most people spend years repeating the same patterns. You don't have to. Take the test and find out exactly what's standing between you and the connection you want.</p>
+    <button class="cta-btn" onclick="startQuiz()">Take the Test Now →</button>
+  </div>
+
+  <footer>
+    © 2025 The Dating Diagnosis · All results are for educational purposes
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════
+     QUIZ
+════════════════════════════════════════ -->
+<div id="quiz">
+  <div class="quiz-inner">
+    <div class="quiz-header">
+      <button class="back-btn" onclick="showLanding()">← Back</button>
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar" style="width:10%"></div>
+      </div>
+      <div class="q-num" id="qNum">1 / 10</div>
+    </div>
+
+    <div id="questions"></div>
+
+    <div class="quiz-nav">
+      <div></div>
+      <button class="quiz-next" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAYMENT
+════════════════════════════════════════ -->
+<div id="payment">
+  <div class="payment-card">
+    <div class="payment-icon">🔒</div>
+    <h2>Your result is ready.</h2>
+    <p>We've analysed your answers and identified your dating blocker. Unlock your full personalised breakdown for just £3.</p>
+    <div class="price-display">
+      <div class="price-big">£3</div>
+      <div class="price-desc">One-time payment · Instant access · No subscription</div>
+    </div>
+    <button class="pay-btn" onclick="goToStripe()">Unlock My Result →</button>
+    <div class="secure-note">🔒 Secure checkout · Results available immediately</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     RESULTS
+════════════════════════════════════════ -->
+<div id="results">
+  <div class="results-inner">
+    <div class="result-header">
+      <div class="result-type-badge" id="resultBadge"></div>
+      <h2 id="resultTitle"></h2>
+      <div class="subtitle" id="resultSubtitle"></div>
+    </div>
+
+    <div class="result-breakdown">
+      <h3>What this means for you</h3>
+      <div id="resultBody"></div>
+      <div class="score-bars" id="scoreBars"></div>
+    </div>
+
+    <div class="upsell-card">
+      <div class="upsell-badge">Next Step</div>
+      <h3>The Connection Course</h3>
+      <p id="upsellBody">Now that you know what's blocking you, it's time to fix it. The Connection Course is built around real attraction, genuine connection, and dates that actually go somewhere.</p>
+      <div class="course-features">
+        <div class="course-feature"><span class="check">✓</span> Module tailored to your exact blocker type</div>
+        <div class="course-feature"><span class="check">✓</span> Why attraction builds (and what kills it)</div>
+        <div class="course-feature"><span class="check">✓</span> How to create real emotional connection</div>
+        <div class="course-feature"><span class="check">✓</span> Practical scripts, tools & frameworks</div>
+        <div class="course-feature"><span class="check">✓</span> Lifetime access — learn at your pace</div>
+      </div>
+      <div class="upsell-price">
+        <div class="was">Usually £97</div>
+        <div class="now">£47</div>
+      </div>
+      <button class="course-btn">Join the Course → Save £50 Today</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    text: "After a good first date, what usually happens next?",
+    options: [
+      "They seem keen but the momentum fades",
+      "We text but it never leads to another date",
+      "I overthink my messages and wait too long",
+      "Things just don't progress and I'm not sure why",
+      "We meet again but it stays surface-level",
+      "We see each other again — I'm good at keeping things moving"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "How do you feel in the first 10 minutes of meeting someone new you're attracted to?",
+    options: [
+      "Comfortable, but maybe too comfortable — like a friend",
+      "Quiet and unsure how to show my interest",
+      "Anxious — I'm monitoring everything I say",
+      "Fine, but I feel like something's slightly off",
+      "Present, but I struggle to open up emotionally",
+      "Relaxed and natural — I enjoy it"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "Which phrase hits closest to home?",
+    options: [
+      "\"I always end up in the friend zone\"",
+      "\"I feel like people don't notice me romantically\"",
+      "\"I kill the vibe by overthinking\"",
+      "\"I can't figure out what I'm doing wrong\"",
+      "\"People like me but no one really gets me\"",
+      "\"Dating comes naturally — I just want something deeper\""
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "When you like someone, how do you usually show it?",
+    options: [
+      "I'm warm and attentive — maybe too much so",
+      "I hold back — I don't want to seem too keen",
+      "I plan the perfect moment and miss it",
+      "I try different things but nothing seems to land",
+      "I'm interested, but I keep things at arm's length",
+      "Naturally and confidently — flirting feels easy"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "A date goes really well. What's your honest first thought?",
+    options: [
+      "\"I hope I didn't come across too eager\"",
+      "\"Did they actually like me or were they just being polite?\"",
+      "\"I should have said X instead of Y\"",
+      "\"That was good, but I'm not sure what comes next\"",
+      "\"It was nice but I still feel a bit distant from them\"",
+      "\"That was great — I know exactly what to do next\""
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "People who know you well would describe your dating life as…",
+    options: [
+      "\"You're too nice — you need to be less available\"",
+      "\"You're great, I don't know why you're single\"",
+      "\"You need to stop overthinking and just go for it\"",
+      "\"You're so close — something small is holding you back\"",
+      "\"You're picky — you don't let people in\"",
+      "\"You're great at dating — just haven't found the right one\""
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "What does modern dating feel like for you?",
+    options: [
+      "Friendly but rarely romantic",
+      "Like I'm invisible despite being a good person",
+      "Exhausting — my own mind is my biggest enemy",
+      "Inconsistent — sometimes great, often confusing",
+      "Fast and shallow — nobody wants real depth",
+      "Manageable — I can navigate it, I just want better outcomes"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "When attraction fades between you and someone, what's your gut feeling about why?",
+    options: [
+      "I made it too easy — no tension",
+      "I never really signalled I was interested",
+      "I said something wrong or acted too desperate",
+      "I'm genuinely not sure — it keeps happening",
+      "They wanted something more vulnerable than I gave",
+      "Honestly, we just weren't right for each other"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "How do you handle emotional conversations early in dating?",
+    options: [
+      "I go deep fast — sometimes too fast",
+      "I stay light — I don't want to scare them off",
+      "I rehearse answers in my head during the conversation",
+      "I try to be open but I'm not sure it's working",
+      "I find them uncomfortable — I prefer to keep things light",
+      "I handle them well — I'm comfortable being real with people"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  },
+  {
+    text: "If you had to describe your dating goal right now, it would be…",
+    options: [
+      "Creating and maintaining attraction, not just friendship",
+      "Being noticed and pursued instead of overlooked",
+      "Switching off the anxiety and just being present",
+      "Understanding the one thing I keep getting wrong",
+      "Being able to genuinely connect on a deeper level",
+      "Finding the right person — I know how to date, I want a real relationship"
+    ],
+    scores: ["FZ","INV","OT","AT","DC","NT"]
+  }
+];
+
+const resultTypes = {
+  INV: {
+    name: "The Invisible",
+    color: "#e74c3c",
+    badge: "Dating Blocker: Visibility",
+    title: "You're not being seen.",
+    subtitle: "You have genuine qualities — but the signals you're sending aren't landing. People may like you without ever seeing you as a romantic option.",
+    body: `<p>The core of your challenge isn't confidence — it's <em>signal clarity</em>. You're sending low-intensity romantic signals that read as friendly rather than attracted. Over time, this creates a pattern where people enjoy your company without ever considering you as a partner.</p><p>The good news? This is one of the most fixable patterns. When you understand how attraction signals work — and how to calibrate them — everything shifts. Fast.</p>`,
+    bars: [
+      { label: "Signal Clarity", value: 22, color: "#e74c3c" },
+      { label: "Presence", value: 55, color: "#e67e22" },
+      { label: "Emotional Depth", value: 70, color: "#27ae60" },
+      { label: "Self-Awareness", value: 68, color: "#27ae60" }
+    ],
+    upsell: "Your module in the Connection Course focuses specifically on attraction signalling — how to be seen, pursued, and chosen by the people you're actually interested in."
+  },
+  FZ: {
+    name: "The Friend-Zoner",
+    color: "#e67e22",
+    badge: "Dating Blocker: Tension",
+    title: "You create connection — but not attraction.",
+    subtitle: "People enjoy being around you. They trust you. They just don't feel romantic tension. And without tension, attraction stalls.",
+    body: `<p>You're doing a lot of things right. You're warm, attentive, and genuinely good company. But romantic attraction requires something beyond warmth — it requires <em>tension, mystery, and polarity</em>. Right now, you're resolving that tension too quickly.</p><p>The shift isn't about playing games. It's about understanding the dynamic that makes someone think about you when you're not there. That's what the course teaches.</p>`,
+    bars: [
+      { label: "Likability", value: 90, color: "#27ae60" },
+      { label: "Romantic Tension", value: 18, color: "#e74c3c" },
+      { label: "Emotional Depth", value: 75, color: "#27ae60" },
+      { label: "Boundaries", value: 30, color: "#e67e22" }
+    ],
+    upsell: "Your module covers the exact dynamics of attraction vs. connection — and how to hold the tension that makes someone choose you as a partner, not just a friend."
+  },
+  OT: {
+    name: "The Overthinker",
+    color: "#f39c12",
+    badge: "Dating Blocker: Anxiety",
+    title: "Your mind is louder than your presence.",
+    subtitle: "You're smart, self-aware, and well-intentioned. But in dating, your brain is working against you — analysing instead of connecting.",
+    body: `<p>Overthinking in dating isn't a personality flaw — it's a protection mechanism. At some point, dating felt risky, so your brain started scanning for threats. The problem is, that vigilance makes you less present, less spontaneous, and harder to read — which kills attraction.</p><p>The fix is counterintuitive: it's not about thinking better. It's about learning to trust the moment. That's a skill — and it can be built.</p>`,
+    bars: [
+      { label: "Self-Awareness", value: 88, color: "#27ae60" },
+      { label: "Presence", value: 28, color: "#e74c3c" },
+      { label: "Spontaneity", value: 22, color: "#e74c3c" },
+      { label: "Emotional Intelligence", value: 72, color: "#27ae60" }
+    ],
+    upsell: "Your module in the Connection Course is built around breaking the overthinking loop — practical tools to stay present, calm your nervous system, and let attraction happen naturally."
+  },
+  AT: {
+    name: "The Almost-There",
+    color: "#27ae60",
+    badge: "Dating Blocker: The Final Piece",
+    title: "You're close. One shift changes everything.",
+    subtitle: "You're doing more right than wrong. Dates happen. Attraction exists. But something keeps stopping it from becoming something real.",
+    body: `<p>This is the most nuanced blocker — because you're not obviously stuck. Dates happen. People like you. But there's a gap between "promising" and "real connection," and you keep falling into it.</p><p>Usually this comes down to one specific moment or pattern — a way you show up (or don't) at a key point. Once you identify it, it tends to click fast. That's exactly what the course helps you find.</p>`,
+    bars: [
+      { label: "Getting Dates", value: 72, color: "#27ae60" },
+      { label: "Sustaining Momentum", value: 38, color: "#e67e22" },
+      { label: "Attraction", value: 65, color: "#27ae60" },
+      { label: "Conversion to Relationship", value: 25, color: "#e74c3c" }
+    ],
+    upsell: "Your module focuses on identifying and closing that final gap — the specific moment where things stall for you, and how to move past it into something real."
+  },
+  DC: {
+    name: "The Disconnected",
+    color: "#95a5a6",
+    badge: "Dating Blocker: Depth",
+    title: "Surface is easy. Depth is the challenge.",
+    subtitle: "You can hold a conversation, make people laugh, and seem confident. But when it comes to real emotional intimacy, you pull back — and they feel it.",
+    body: `<p>Disconnection in dating often comes from a place of self-protection. Letting someone in feels risky, so you keep things light and controlled. The problem is that lasting attraction requires vulnerability — and the people worth being with can sense when it's absent.</p><p>This isn't about oversharing. It's about learning the specific moments where depth is invited, and how to step into them without losing yourself.</p>`,
+    bars: [
+      { label: "Surface Connection", value: 85, color: "#27ae60" },
+      { label: "Emotional Depth", value: 20, color: "#e74c3c" },
+      { label: "Vulnerability", value: 18, color: "#e74c3c" },
+      { label: "Long-term Potential", value: 35, color: "#e67e22" }
+    ],
+    upsell: "Your module in the Connection Course is built around emotional depth — how to open up authentically, create real intimacy, and attract people who want the same."
+  },
+  NT: {
+    name: "The Natural",
+    color: "#8e44ad",
+    badge: "Dating Profile: The Natural",
+    title: "You're good at this. Now go deeper.",
+    subtitle: "Dating isn't your problem. Attraction comes naturally, conversations flow, and you know how to show up. What you're after is something more — the right person, real connection, a relationship that actually lasts.",
+    body: `<p>You're in a different position to most people who take this test. The basics aren't the issue — you're confident, you read situations well, and you know how to make someone feel drawn to you. That's genuinely rare.</p><p>But here's what confident daters often discover: <em>getting dates is a different skill to building something real</em>. The things that create initial attraction — confidence, mystery, ease — aren't always the same things that create lasting connection, trust, and partnership.</p><p>The Connection Course is built for exactly this stage. Not fixing a blocker, but upgrading from good to great — so that when the right person shows up, you know exactly how to build something that lasts.</p>`,
+    bars: [
+      { label: "Confidence", value: 90, color: "#27ae60" },
+      { label: "Attraction", value: 85, color: "#27ae60" },
+      { label: "Getting Dates", value: 88, color: "#27ae60" },
+      { label: "Deep Connection", value: 52, color: "#e67e22" }
+    ],
+    upsell: "The Connection Course will take you from naturally good at dating to genuinely great at relationships — building the kind of real, lasting connection that most people never figure out."
+  }
+};
+
+let currentQ = 0;
+let answers = [];
+let selectedOption = null;
+
+function showLanding() {
+  document.getElementById('landing').style.display = 'flex';
+  document.getElementById('landing').style.flexDirection = 'column';
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('payment').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() {
+  currentQ = 0;
+  answers = [];
+  selectedOption = null;
+  buildQuestions();
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('payment').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function buildQuestions() {
+  const container = document.getElementById('questions');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const block = document.createElement('div');
+    block.className = 'question-block' + (i === 0 ? ' active' : '');
+    block.id = 'q' + i;
+
+    const letters = ['A','B','C','D','E','F'];
+    block.innerHTML = `
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.options.map((opt, j) => `
+          <button class="option" onclick="selectOption(${i}, ${j})">
+            <span class="opt-letter">${letters[j]}</span>
+            ${opt}
+          </button>
+        `).join('')}
+      </div>
+    `;
+    container.appendChild(block);
+  });
+  updateProgress();
+}
+
+function selectOption(qIndex, optIndex) {
+  answers[qIndex] = questions[qIndex].scores[optIndex];
+  selectedOption = optIndex;
+
+  document.querySelectorAll('#q' + qIndex + ' .option').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === optIndex);
+  });
+
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.classList.add('visible');
+  if (currentQ === questions.length - 1) {
+    nextBtn.textContent = 'See My Result →';
+  }
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === undefined) return;
+
+  if (currentQ < questions.length - 1) {
+    document.getElementById('q' + currentQ).classList.remove('active');
+    currentQ++;
+    document.getElementById('q' + currentQ).classList.add('active');
+    selectedOption = null;
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.classList.remove('visible');
+    nextBtn.textContent = currentQ === questions.length - 1 ? 'See My Result →' : 'Next →';
+    updateProgress();
+    window.scrollTo(0, 0);
+  } else {
+    showPayment();
+  }
+}
+
+function updateProgress() {
+  const pct = ((currentQ + 1) / questions.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('qNum').textContent = (currentQ + 1) + ' / ' + questions.length;
+}
+
+let pendingResultType = null;
+
+function showPayment() {
+  const tally = { INV:0, FZ:0, OT:0, AT:0, DC:0, NT:0 };
+  answers.forEach(a => { if(tally[a] !== undefined) tally[a]++; });
+  pendingResultType = Object.entries(tally).sort((a,b) => b[1]-a[1])[0][0];
+  try { sessionStorage.setItem('datingResult', pendingResultType); } catch(e) {}
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('payment').style.display = 'flex';
+  window.scrollTo(0, 0);
+}
+
+function goToStripe() {
+  const type = pendingResultType || sessionStorage.getItem('datingResult') || 'AT';
+  window.location.href = 'https://buy.stripe.com/5kQ7sF03h9yoal30q75wI02?client_reference_id=' + type + '&success_url=' + encodeURIComponent('https://ionutgagiu82.github.io/dating-diagnosis/results.html?type=' + type);
+}
+
+function showResults() {
+  // tally scores
+  const tally = { INV:0, FZ:0, OT:0, AT:0, DC:0, NT:0 };
+  answers.forEach(a => { if(tally[a] !== undefined) tally[a]++; });
+  const topType = Object.entries(tally).sort((a,b) => b[1]-a[1])[0][0];
+  const r = resultTypes[topType];
+
+  document.getElementById('resultBadge').textContent = r.badge;
+  document.getElementById('resultBadge').style.color = r.color;
+  document.getElementById('resultBadge').style.borderColor = r.color;
+  document.getElementById('resultTitle').innerHTML = r.title;
+  document.getElementById('resultSubtitle').textContent = r.subtitle;
+  document.getElementById('resultBody').innerHTML = r.body;
+  document.getElementById('upsellBody').textContent = r.upsell;
+
+  const barsEl = document.getElementById('scoreBars');
+  barsEl.innerHTML = r.bars.map(b => `
+    <div class="score-row">
+      <div class="score-label">${b.label}</div>
+      <div class="score-track">
+        <div class="score-fill" style="background:${b.color}; --target:${b.value}%;"></div>
+      </div>
+      <div class="score-pct">${b.value}%</div>
+    </div>
+  `).join('');
+
+  document.getElementById('payment').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+// init
+showLanding();
+</script>
+</body>
+</html>
+
 <title>Why You're Not Getting Dates — Find Out Now</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
