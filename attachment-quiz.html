@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attachment Style Quiz | The Connection Code</title>
+<meta name="description" content="Five questions to find your attachment style. Free, no sign up needed. By Coach John Gagiu, The Connection Code.">
+<link rel="canonical" href="https://theconnectioncode.co.uk/attachment-quiz.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --light:#FAFAF7;--light2:#F2EDE6;
+  --dark:#141210;--dark2:#1C1814;
+  --ink:#1A1714;--stone:#6E6560;
+  --gold:#C49A4A;--gold2:#D4AA5A;
+  --gold-pale:rgba(196,154,74,0.1);
+  --gold-border:rgba(196,154,74,0.22);
+  --white:#FFFFFF;--border:#E4DDD4;
+}
+body{background:var(--light);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:rgba(250,250,247,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.n-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.n-mark{width:36px;height:36px;border:1.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;position:relative}
+.n-mark::after{content:'';position:absolute;inset:4px;border:1px solid var(--gold-border)}
+.n-mark span{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:500;color:var(--gold);position:relative;z-index:1}
+.n-name{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink);line-height:1.25}
+.n-links{display:flex;align-items:center;gap:30px}
+.n-links a{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--stone);font-weight:400;text-decoration:none;transition:color .2s}
+.n-links a:hover,.n-links a.active{color:var(--ink)}
+.n-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.n-cta{background:var(--gold)!important;color:var(--white)!important;padding:11px 26px;font-weight:500!important;border-bottom:none!important}
+.btn{display:inline-block;text-decoration:none;font-family:'Outfit',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:500;padding:15px 36px;transition:all .28s;cursor:pointer;border:0}
+.btn-gold{background:var(--gold);color:var(--white);border:1px solid var(--gold)}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 10px 32px rgba(196,154,74,0.28)}
+.btn-outline{border:1.5px solid var(--border);color:var(--ink);background:transparent}
+.btn-outline:hover{border-color:var(--ink)}
+.sec-ey{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.sec-ey::before{content:'';width:24px;height:1px;background:var(--gold)}
+
+main{padding:110px 24px 80px;min-height:100vh}
+.wrap{max-width:720px;margin:0 auto}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.15}
+
+/* progress */
+.prog{display:flex;align-items:center;gap:16px;margin-bottom:34px}
+.prog-bar{flex:1;height:3px;background:var(--border);position:relative}
+.prog-fill{position:absolute;left:0;top:0;bottom:0;background:var(--gold);width:0;transition:width .4s}
+.prog-txt{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone);white-space:nowrap}
+
+/* question */
+.q h2{font-size:clamp(28px,5vw,42px);margin-bottom:30px}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{width:100%;text-align:left;background:var(--white);border:1.5px solid var(--border);padding:20px 24px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:300;color:var(--ink);cursor:pointer;transition:all .2s;line-height:1.5}
+.opt:hover{border-color:var(--gold);background:var(--gold-pale)}
+.opt.sel{border-color:var(--gold);background:var(--gold-pale)}
+.back{margin-top:26px;background:none;border:0;font-family:'Outfit',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone);cursor:pointer}
+.back:hover{color:var(--ink)}
+.back[hidden]{display:none}
+
+/* intro */
+.intro .free-tag{display:inline-block;background:var(--gold-pale);border:1px solid var(--gold-border);padding:8px 16px;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:24px}
+.intro h1{font-size:clamp(38px,7vw,60px);margin-bottom:20px}
+.intro p{font-size:17px;color:var(--stone);margin-bottom:34px;max-width:560px}
+
+/* result */
+.res-tag{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:12px}
+.res h1{font-size:clamp(40px,7vw,64px);margin-bottom:8px}
+.res .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--stone);margin-bottom:28px}
+.res p.body{font-size:17px;margin-bottom:22px}
+.box{background:var(--white);border:1px solid var(--border);padding:28px 30px;margin:26px 0}
+.box h3{font-size:24px;margin-bottom:14px}
+.box ul{list-style:none}
+.box li{padding:9px 0 9px 26px;position:relative;font-size:16px;border-bottom:1px solid var(--border)}
+.box li:last-child{border-bottom:0}
+.box li::before{content:'';position:absolute;left:0;top:19px;width:12px;height:1px;background:var(--gold)}
+.john{background:var(--dark);color:var(--white);padding:30px 32px;margin:26px 0}
+.john .lbl{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.john p{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;line-height:1.4;font-weight:300}
+.note{font-size:13px;color:var(--stone);margin-top:6px}
+
+/* email capture */
+.cap{background:var(--light2);border:1px solid var(--gold-border);padding:30px;margin:34px 0}
+.cap h3{font-size:26px;margin-bottom:8px}
+.cap p{font-size:15px;color:var(--stone);margin-bottom:18px}
+.cap input[type=email]{width:100%;padding:16px 18px;border:1.5px solid var(--border);background:var(--white);font-family:'Outfit',sans-serif;font-size:16px;margin-bottom:14px}
+.cap input[type=email]:focus{outline:none;border-color:var(--gold)}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--stone);margin-bottom:18px}
+.chk input{margin-top:4px;accent-color:var(--gold)}
+.msg{font-size:15px;margin-top:14px}
+.msg.ok{color:#3d6b3d}.msg.err{color:#a33}
+
+/* next steps */
+.next{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 36px}
+.next a{display:block;background:var(--white);border:1px solid var(--border);padding:22px 20px;text-decoration:none;color:var(--ink);transition:all .25s}
+.next a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.next .nt{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:6px;display:block}
+.next .nd{font-size:13px;color:var(--stone);display:block}
+.retake{text-align:center}
+
+footer{background:#0D0B09;padding:48px 56px 32px;text-align:center}
+footer .fn{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--white);margin-bottom:10px}
+footer .fl{font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:6px}
+footer a{color:rgba(255,255,255,0.45);text-decoration:none}
+footer a:hover{color:var(--gold)}
+footer .fc2{font-size:10.5px;color:rgba(255,255,255,0.18);letter-spacing:0.07em;margin-top:18px}
+
+[hidden]{display:none!important}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .n-links a:not(.n-cta){display:none}
+  main{padding:96px 20px 60px}
+  .next{grid-template-columns:1fr}
+  .box,.cap,.john{padding:24px 22px}
+  footer{padding:40px 24px 28px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="n-logo">
+    <div class="n-mark"><span>CC</span></div>
+    <div class="n-name">The Connection<br>Code</div>
+  </a>
+  <div class="n-links"><a href="twelve.html">Twelve</a><a href="quiz.html" class="active">Quiz</a><a href="text-coach.html">Text Coach</a><a href="diagnosis.html">Diagnosis</a><a href="coaching.html">Coaching</a><a href="podcast.html">Podcast</a><a href="coaching.html" class="n-cta">Book a Session</a></div>
+</nav>
+
+<main>
+<div class="wrap">
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <span class="free-tag">Completely free. No sign up required</span>
+    <h1>Discover your attachment style</h1>
+    <p>Five questions. Answer with what you actually do, not what you wish you did. It takes about a minute.</p>
+    <button class="btn btn-gold" id="startBtn">Start the quiz</button>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="q" id="quiz" hidden>
+    <div class="prog">
+      <div class="prog-bar"><div class="prog-fill" id="fill"></div></div>
+      <div class="prog-txt" id="ptxt">Question 1 of 5</div>
+    </div>
+    <h2 id="qtext"></h2>
+    <div class="opts" id="opts"></div>
+    <button class="back" id="backBtn" hidden>&larr; Back</button>
+  </section>
+
+  <!-- RESULT -->
+  <section class="res" id="result" hidden>
+    <div class="res-tag">Your result</div>
+    <h1 id="rTitle"></h1>
+    <div class="sub" id="rSub"></div>
+    <p class="body" id="rBody"></p>
+
+    <div class="box">
+      <h3>What it looks like</h3>
+      <ul id="rLooks"></ul>
+    </div>
+    <div class="box">
+      <h3>What to work on</h3>
+      <ul id="rWork"></ul>
+    </div>
+    <div class="john">
+      <div class="lbl">From Coach John</div>
+      <p id="rJohn"></p>
+    </div>
+    <p class="note">This quiz is for insight and reflection. It is not a clinical diagnosis, and most people show a mix of styles depending on the person and the moment.</p>
+
+    <!-- EMAIL CAPTURE (optional) -->
+    <div class="cap" id="cap">
+      <h3>Want more like this?</h3>
+      <p>Leave your email and I'll send you practical tips for your style. Optional. Your result above is already yours.</p>
+      <form id="capForm" novalidate>
+        <input type="email" id="email" name="email" placeholder="Your email address" autocomplete="email" required>
+        <label class="chk"><input type="checkbox" id="consent" required> <span>Yes, send me emails from The Connection Code. I can unsubscribe at any time.</span></label>
+        <button type="submit" class="btn btn-gold" id="subBtn">Send me tips</button>
+        <div class="msg" id="capMsg" role="status"></div>
+      </form>
+    </div>
+
+    <div class="sec-ey">What next?</div>
+    <div class="next">
+      <a href="diagnosis.html"><span class="nt">Dating Diagnosis</span><span class="nd">A personalised report on how you date. £3.</span></a>
+      <a href="text-coach.html"><span class="nt">Text Coach</span><span class="nd">Get help with exactly what to reply.</span></a>
+      <a href="coaching.html"><span class="nt">1-to-1 Coaching</span><span class="nd">Work with me directly, in Newcastle or online.</span></a>
+    </div>
+    <div class="retake"><button class="btn btn-outline" id="retakeBtn">Retake the quiz</button></div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="fn">The Connection Code</div>
+  <div class="fl">Newcastle upon Tyne, England</div>
+  <div class="fl"><a href="mailto:john@theconnectioncode.co.uk">john@theconnectioncode.co.uk</a></div>
+  <div class="fc2">&copy; 2026 The Connection Code &middot; Coach John Gagiu &middot; theconnectioncode.co.uk</div>
+</footer>
+
+<script>
+/* ============ SETTINGS ============
+   Paste your Formspree form address here (looks like https://formspree.io/f/abcdwxyz).
+   Until you do, the email box will show a friendly error instead of saving.      */
+const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+/* ================================== */
+
+const QUESTIONS = [
+  { q: "You text someone you like and they don't reply for a day. What do you do?",
+    a: [
+      ["S", "Carry on with my day. If it matters, they'll reply."],
+      ["A", "Check my phone again and again and replay what I wrote."],
+      ["V", "Feel a little relieved. Space suits me."],
+      ["F", "Want to message them again and pull away at the same time."]
+    ]},
+  { q: "Things start getting serious with someone. How do you feel?",
+    a: [
+      ["S", "Happy and settled. I'm glad to see where it goes."],
+      ["A", "Excited, but waiting for it to be taken away."],
+      ["V", "I suddenly need space, or I start noticing their flaws."],
+      ["F", "Drawn in and scared at the same moment."]
+    ]},
+  { q: "After an argument, what do you usually do?",
+    a: [
+      ["S", "Talk it through once we've both calmed down."],
+      ["A", "Need to fix it right now and need to hear we're okay."],
+      ["V", "Go quiet and shut down until it blows over."],
+      ["F", "Swing between wanting them close and wanting to disappear."]
+    ]},
+  { q: "Opening up about your fears and needs feels...",
+    a: [
+      ["S", "Sometimes uncomfortable, but worth it."],
+      ["A", "Easy. I tend to share a lot, fast, to feel close."],
+      ["V", "Like losing control. I'd rather handle things alone."],
+      ["F", "Like something I want but don't trust to be safe."]
+    ]},
+  { q: "Deep down, your biggest fear in love is...",
+    a: [
+      ["S", "Nothing in particular. I trust I can handle what comes."],
+      ["A", "Being left, or not being enough."],
+      ["V", "Being controlled, or losing myself."],
+      ["F", "Being hurt, and also ending up alone."]
+    ]}
+];
+
+const RESULTS = {
+  S: {
+    title: "Secure",
+    sub: "Comfortable with closeness and with space",
+    body: "You tend to trust that you are lovable and that other people can be relied on. You can be close without losing yourself, and you can handle distance without panic. That doesn't mean you never struggle. It means that when you do, you can usually talk about it.",
+    looks: [
+      "You say what you need without turning it into a fight",
+      "You don't read silence as rejection",
+      "You can leave a relationship that isn't right without drowning in it",
+      "You give people the benefit of the doubt, but not forever"
+    ],
+    work: [
+      "Watch for staying too long out of loyalty. Secure doesn't mean tolerating everything",
+      "Be patient with partners who aren't secure. You can be steady without carrying them",
+      "Keep choosing people who show up consistently, not just in the good moments"
+    ],
+    john: "Secure isn't perfect. It's being able to repair. Real connection beats chemistry every time."
+  },
+  A: {
+    title: "Anxious",
+    sub: "You love deeply and fear losing it",
+    body: "You crave closeness and notice every shift in tone, every slow reply. Underneath it is usually a worry that you have to earn love or that it can disappear. Your intuition is real, but anxiety turns it into noise. Your sensitivity isn't a flaw. It just needs steadier ground.",
+    looks: [
+      "Overthinking messages and waiting for replies",
+      "Needing reassurance to feel okay",
+      "Chasing people who are inconsistent, because the highs feel like chemistry",
+      "Putting the relationship ahead of your own needs"
+    ],
+    work: [
+      "Pause before you send the second message. Let one clear message be enough",
+      "Build self-worth that doesn't depend on someone's reply",
+      "Notice the difference between chemistry and anxiety. They feel almost the same",
+      "Choose people whose actions match their words"
+    ],
+    john: "Don't stay to fix or save someone. If you have to chase it, it isn't connection. Your worth isn't up for negotiation."
+  },
+  V: {
+    title: "Avoidant",
+    sub: "You protect yourself by keeping your distance",
+    body: "You value independence and you've learned to rely on yourself. When someone gets close, you may feel crowded, pull back, or find reasons it won't work. It often looks like strength. Often it's a way to avoid being let down or needing anyone.",
+    looks: [
+      "Needing space right when things get good",
+      "Finding flaws in people who are getting close",
+      "Keeping feelings to yourself, even with someone you trust",
+      "Going quiet instead of saying what's wrong"
+    ],
+    work: [
+      "Practise saying one honest feeling out loud, even a small one",
+      "When you want to pull away, say 'I need a bit of space', not nothing",
+      "Notice if you only want people who aren't fully available",
+      "Let someone help you before you absolutely need it"
+    ],
+    john: "Needing no one isn't strength. Letting the right person see the real you takes more courage than any independence."
+  },
+  F: {
+    title: "Fearful-Avoidant",
+    sub: "You want closeness and fear it in equal measure",
+    body: "You may swing between wanting someone close and needing to run. Love can feel exciting and unsafe at once. This pattern often grows from relationships that were unpredictable early on. It makes sense, and it can change.",
+    looks: [
+      "Hot and cold in relationships, sometimes in the same day",
+      "Strong feelings and strong urges to withdraw",
+      "Testing people, or expecting to be let down",
+      "Struggling to tell what you want from what you fear"
+    ],
+    work: [
+      "Slow things down. Intensity isn't intimacy",
+      "Learn what you feel before you decide what to do about it",
+      "Pick consistent people and let consistency feel boring for a while",
+      "Consider working with a coach or therapist. This pattern changes best with support"
+    ],
+    john: "You're not too much, and you're not broken. You learned to protect yourself. Now you can learn to be safe with someone."
+  }
+};
+
+const $ = id => document.getElementById(id);
+let idx = 0, answers = [];
+
+function show(id){ ["intro","quiz","result"].forEach(s => $(s).hidden = (s !== id)); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function renderQ(){
+  const item = QUESTIONS[idx];
+  $("qtext").textContent = item.q;
+  $("ptxt").textContent = "Question " + (idx+1) + " of " + QUESTIONS.length;
+  $("fill").style.width = (idx / QUESTIONS.length * 100) + "%";
+  $("backBtn").hidden = idx === 0;
+  const box = $("opts"); box.innerHTML = "";
+  item.a.forEach(([style, text]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "opt"; b.textContent = text;
+    if (answers[idx] === style) b.classList.add("sel");
+    b.addEventListener("click", () => {
+      answers[idx] = style;
+      b.classList.add("sel");
+      setTimeout(() => {
+        if (idx < QUESTIONS.length - 1){ idx++; renderQ(); } else { finish(); }
+      }, 220);
+    });
+    box.appendChild(b);
+  });
+}
+
+function finish(){
+  $("fill").style.width = "100%";
+  const count = {S:0,A:0,V:0,F:0};
+  answers.forEach(s => count[s]++);
+  const max = Math.max(...Object.values(count));
+  const tied = Object.keys(count).filter(k => count[k] === max);
+  let style = tied[0];
+  if (tied.length > 1 && tied.includes(answers[answers.length-1])) style = answers[answers.length-1];
+  const r = RESULTS[style];
+  window.__style = r.title;
+  $("rTitle").textContent = r.title;
+  $("rSub").textContent = r.sub;
+  $("rBody").textContent = r.body;
+  $("rLooks").innerHTML = r.looks.map(x => "<li>"+x+"</li>").join("");
+  $("rWork").innerHTML = r.work.map(x => "<li>"+x+"</li>").join("");
+  $("rJohn").textContent = "“" + r.john + "”";
+  show("result");
+}
+
+$("startBtn").addEventListener("click", () => { idx = 0; answers = []; show("quiz"); renderQ(); });
+$("backBtn").addEventListener("click", () => { if (idx > 0){ idx--; renderQ(); } });
+$("retakeBtn").addEventListener("click", () => { idx = 0; answers = []; $("capForm").reset(); $("capMsg").textContent = ""; $("capMsg").className = "msg"; $("subBtn").disabled = false; show("quiz"); renderQ(); });
+
+$("capForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("capMsg"); msg.className = "msg"; msg.textContent = "";
+  const email = $("email").value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.className = "msg err"; msg.textContent = "Please enter a valid email address."; return; }
+  if (!$("consent").checked){ msg.className = "msg err"; msg.textContent = "Please tick the box so I know you're happy to hear from me."; return; }
+  $("subBtn").disabled = true;
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ email, attachment_style: window.__style, source: "Attachment Quiz", consent: "yes", _subject: "New Connection Code quiz signup" })
+    });
+    if (!res.ok) throw new Error("bad");
+    msg.className = "msg ok"; msg.textContent = "Thank you. You're on the list.";
+    $("capForm").querySelectorAll("input").forEach(i => i.disabled = true);
+  } catch (err){
+    $("subBtn").disabled = false;
+    msg.className = "msg err";
+    msg.innerHTML = "Something went wrong. Please email me at <a href='mailto:john@theconnectioncode.co.uk'>john@theconnectioncode.co.uk</a>.";
+  }
+});
+</script>
+</body>
+</html>
