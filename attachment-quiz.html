@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Attachment Style Quiz | The Connection Code</title>
-<meta name="description" content="Five questions to find your attachment style. Free, no sign up needed. By Coach John Gagiu, The Connection Code.">
+<meta name="description" content="Sixteen questions to find your attachment style, scored on anxiety and avoidance. Free, no sign up needed. By Coach John Gagiu, The Connection Code.">
 <link rel="canonical" href="https://theconnectioncode.co.uk/attachment-quiz.html">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -124,6 +124,16 @@ footer .fc2{font-size:10.5px;color:rgba(255,255,255,0.18);letter-spacing:0.07em;
   nav.open .n-links a{display:block!important;padding:15px 0;border-bottom:1px solid #E4DDD4;font-size:12px}
   nav.open .n-links a.n-cta{margin-top:14px;text-align:center;border-bottom:none;padding:14px}
 }
+
+.scales{margin:30px 0 8px;display:grid;gap:22px}
+.sc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.sc-name{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ink);font-weight:500}
+.sc-lvl{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold)}
+.sc-bar{height:6px;background:var(--border);position:relative}
+.sc-fill{position:absolute;left:0;top:0;bottom:0;background:var(--gold);width:0;transition:width .9s ease}
+.sc-desc{font-size:13px;color:var(--stone);margin-top:8px;line-height:1.6}
+.cp-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin:2px 0 6px}
+.cp-body{font-size:15px;color:var(--stone);line-height:1.75}
 </style>
 </head>
 <body>
@@ -144,7 +154,7 @@ footer .fc2{font-size:10.5px;color:rgba(255,255,255,0.18);letter-spacing:0.07em;
   <section class="intro" id="intro">
     <span class="free-tag">Completely free. No sign up required</span>
     <h1>Discover your attachment style</h1>
-    <p>Five questions. Answer with what you actually do, not what you wish you did. It takes about a minute.</p>
+    <p>Sixteen questions about how you text, argue, repair and let people in. Answer with what you actually do, not what you wish you did. It takes about five minutes, and you get your result on two scales: anxiety and avoidance.</p>
     <button class="btn btn-gold" id="startBtn">Start the quiz</button>
   </section>
 
@@ -152,7 +162,7 @@ footer .fc2{font-size:10.5px;color:rgba(255,255,255,0.18);letter-spacing:0.07em;
   <section class="q" id="quiz" hidden>
     <div class="prog">
       <div class="prog-bar"><div class="prog-fill" id="fill"></div></div>
-      <div class="prog-txt" id="ptxt">Question 1 of 5</div>
+      <div class="prog-txt" id="ptxt">Question 1 of 16</div>
     </div>
     <h2 id="qtext"></h2>
     <div class="opts" id="opts"></div>
@@ -166,13 +176,27 @@ footer .fc2{font-size:10.5px;color:rgba(255,255,255,0.18);letter-spacing:0.07em;
     <div class="sub" id="rSub"></div>
     <p class="body" id="rBody"></p>
 
+    <div class="scales">
+      <div class="scale">
+        <div class="sc-top"><span class="sc-name">Anxiety</span><span class="sc-lvl" id="anxLvl"></span></div>
+        <div class="sc-bar"><div class="sc-fill" id="anxFill"></div></div>
+        <div class="sc-desc">How strongly you worry about being left, and need reassurance to feel safe.</div>
+      </div>
+      <div class="scale">
+        <div class="sc-top"><span class="sc-name">Avoidance</span><span class="sc-lvl" id="avoLvl"></span></div>
+        <div class="sc-bar"><div class="sc-fill" id="avoFill"></div></div>
+        <div class="sc-desc">How uncomfortable you are with closeness, and with depending on someone.</div>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>Your conflict pattern</h3>
+      <p class="cp-title" id="cpTitle"></p>
+      <p class="cp-body" id="cpBody"></p>
+    </div>
     <div class="box">
       <h3>What it looks like</h3>
       <ul id="rLooks"></ul>
-    </div>
-    <div class="box">
-      <h3>What to work on</h3>
-      <ul id="rWork"></ul>
     </div>
     <div class="john">
       <div class="lbl">From Coach John</div>
@@ -182,12 +206,12 @@ footer .fc2{font-size:10.5px;color:rgba(255,255,255,0.18);letter-spacing:0.07em;
 
     <!-- EMAIL CAPTURE (optional) -->
     <div class="cap" id="cap">
-      <h3>Want more like this?</h3>
-      <p>Leave your email and I'll send you practical tips for your style. Optional. Your result above is already yours.</p>
+      <h3>Want your full in-depth report?</h3>
+      <p>What you see above is the summary. The full report goes much deeper: your triggers, what you do under stress, what a partner experiences, and a step-by-step plan for your pattern. Leave your email and I'll send it to you.</p>
       <form id="capForm" novalidate>
         <input type="email" id="email" name="email" placeholder="Your email address" autocomplete="email" required>
-        <label class="chk"><input type="checkbox" id="consent" required> <span>Yes, send me emails from The Connection Code. I can unsubscribe at any time.</span></label>
-        <button type="submit" class="btn btn-gold" id="subBtn">Send me tips</button>
+        <label class="chk"><input type="checkbox" id="consent" required> <span>Yes, send me my report and emails from The Connection Code. I can unsubscribe at any time.</span></label>
+        <button type="submit" class="btn btn-gold" id="subBtn">Send me my full report</button>
         <div class="msg" id="capMsg" role="status"></div>
       </form>
     </div>
@@ -219,119 +243,186 @@ const FORM_ENDPOINT = "https://formspree.io/f/maeoeozb";
 /* ================================== */
 
 const QUESTIONS = [
-  { q: "You text someone you like and they don't reply for a day. What do you do?",
+  { q: "You text someone you like and a full day passes with no reply. What actually happens in your head?",
     a: [
-      ["S", "Carry on with my day. If it matters, they'll reply."],
-      ["A", "Check my phone again and again and replay what I wrote."],
-      ["V", "Feel a little relieved. Space suits me."],
-      ["F", "Want to message them again and pull away at the same time."]
+      ["S", "Not much. People are busy. I'll hear from them when I hear from them."],
+      ["A", "I reread what I sent, look for what I did wrong, and check my phone more than I'd admit."],
+      ["V", "A small relief, honestly. I like it when things aren't moving too fast."],
+      ["F", "I want to send another message and delete their number at the same time."]
     ]},
-  { q: "Things start getting serious with someone. How do you feel?",
+  { q: "Things are going well and they say they want something serious with you. What is your first honest reaction?",
     a: [
-      ["S", "Happy and settled. I'm glad to see where it goes."],
-      ["A", "Excited, but waiting for it to be taken away."],
-      ["V", "I suddenly need space, or I start noticing their flaws."],
-      ["F", "Drawn in and scared at the same moment."]
+      ["V", "A tightening in my chest. I start thinking about what I'd have to give up."],
+      ["S", "Pleased. I'm happy to see where it goes."],
+      ["F", "I want it badly and feel sure it will go wrong, so I start looking for the flaw."],
+      ["A", "Relief, followed by a worry they'll change their mind once they really know me."]
     ]},
-  { q: "After an argument, what do you usually do?",
+  { q: "Your partner says they need an evening alone to recharge. What do you do with that?",
     a: [
-      ["S", "Talk it through once we've both calmed down."],
-      ["A", "Need to fix it right now and need to hear we're okay."],
-      ["V", "Go quiet and shut down until it blows over."],
-      ["F", "Swing between wanting them close and wanting to disappear."]
+      ["A", "I say it's fine, then spend the evening wondering if something is wrong between us."],
+      ["S", "Take it at face value. I like having an evening to myself too."],
+      ["V", "It's easy. If anything, I'm usually the one who needs more space than they do."],
+      ["F", "I say fine, feel rejected, then feel annoyed at myself for feeling rejected."]
     ]},
-  { q: "Opening up about your fears and needs feels...",
+  { q: "You're in the middle of a real argument. What are you most likely to do?", conflict: true,
     a: [
-      ["S", "Sometimes uncomfortable, but worth it."],
-      ["A", "Easy. I tend to share a lot, fast, to feel close."],
-      ["V", "Like losing control. I'd rather handle things alone."],
-      ["F", "Like something I want but don't trust to be safe."]
+      ["A", "Push to sort it out right now. If they walk off, I follow. Leaving it unresolved is unbearable."],
+      ["V", "Go quiet or leave the room. I think clearly alone, not in the heat of it."],
+      ["S", "Say what I feel, listen to their side, and take a break if it gets too heated, then come back."],
+      ["F", "Swing. I push hard, then go cold, then feel guilty about both."]
     ]},
-  { q: "Deep down, your biggest fear in love is...",
+  { q: "After an argument, they go silent for a few hours. How do you handle it?", conflict: true,
     a: [
-      ["S", "Nothing in particular. I trust I can handle what comes."],
-      ["A", "Being left, or not being enough."],
-      ["V", "Being controlled, or losing myself."],
-      ["F", "Being hurt, and also ending up alone."]
+      ["S", "Give it time, then reach out. Silence after a fight is normal."],
+      ["A", "I can't settle until we've spoken. I'll text, apologise, even for things that weren't my fault."],
+      ["V", "Fine by me. I'm happy to let it blow over without going through it all again."],
+      ["F", "I tell myself I don't care, then check whether they've been online."]
+    ]},
+  { q: "They text: \"Can we talk tonight?\" Nothing else. What do you do?", conflict: true,
+    a: [
+      ["A", "Spend the rest of the day assuming it's bad."],
+      ["V", "Get defensive in advance. If something is wrong, I'd rather keep it short and move on."],
+      ["S", "Ask if it's urgent, then get on with my day. It could be anything."],
+      ["F", "Prepare for the breakup and prepare my case for why it isn't my fault."]
+    ]},
+  { q: "Your partner says something critical: \"You never ask how my day was.\" What happens inside you?", conflict: true,
+    a: [
+      ["V", "I get defensive or shut down. It feels like an attack, even when it's fair."],
+      ["A", "I feel crushed, apologise a lot, then need reassurance that we're okay."],
+      ["S", "It stings, but I can usually hear the need behind it and talk about it."],
+      ["F", "I fire something back, feel awful, then go quiet."]
+    ]},
+  { q: "You've had a bad day and you're upset. A partner asks what's wrong. What do you do?",
+    a: [
+      ["V", "Say \"I'm fine.\" I'd rather work through it on my own."],
+      ["S", "Tell them. Being heard helps, and they can handle it."],
+      ["A", "Tell them everything, then worry I've said too much and watch how they react."],
+      ["F", "I want them to ask, but when they do I find I can't say it."]
+    ]},
+  { q: "You're busy and your partner says, \"Look at this!\" about something small. What usually happens?",
+    a: [
+      ["S", "I stop and look. Small moments matter, and it takes ten seconds."],
+      ["V", "I nod without looking up and tell myself I'll catch up later. The small stuff isn't my strength."],
+      ["A", "I stop immediately, though I often wish they noticed how much effort I make."],
+      ["F", "Depends on my mood. Sometimes I'm fully there, sometimes I snap, and I can't predict which."]
+    ]},
+  { q: "Your partner comes home after a great night out with friends, without you. How do you feel?",
+    a: [
+      ["S", "Glad they had a good time. I had a decent night myself."],
+      ["A", "Happy for them, but I notice I'm checking whether they missed me."],
+      ["V", "Perfect. Nothing makes me feel freer than a partner with their own life."],
+      ["F", "I act relaxed, then feel strangely hurt that they didn't need me there."]
+    ]},
+  { q: "Someone is warm, consistent and clearly into you from day one. Honestly, how does that feel?",
+    a: [
+      ["A", "Wonderful. I relax and attach quickly, maybe too quickly."],
+      ["V", "Slightly suffocating. I notice I like them more when they're a bit harder to read."],
+      ["S", "Good. It's what I'm looking for, so it doesn't feel strange."],
+      ["F", "Great, then too much or boring, and then I'm confused about what I want."]
+    ]},
+  { q: "Think about how your last relationship ended or went wrong. What's closest to the truth?",
+    a: [
+      ["A", "I gave more than I got, and stayed longer than I should have, hoping it would change."],
+      ["V", "I felt crowded and pulled back until it ended on its own."],
+      ["S", "It stopped working. We both tried, and we ended it with respect, painful as it was."],
+      ["F", "Hot and cold. Intense highs, then pulling away, then a lot of drama."]
+    ]},
+  { q: "When life gets hard, who do you turn to?",
+    a: [
+      ["V", "Myself. Asking for help feels weak, or like a burden."],
+      ["S", "A friend, family or my partner. I ask, and I return the favour."],
+      ["A", "My partner, mostly. When they're not available I struggle."],
+      ["F", "I reach out, then regret it and push people away."]
+    ]},
+  { q: "Things have been tense between you and your partner. What happens to affection?",
+    a: [
+      ["S", "I can still hold their hand and be affectionate. Closeness helps us repair."],
+      ["A", "I want more closeness, to be reassured. Distance feels like punishment."],
+      ["V", "I pull back physically. I don't like affection when I'm unsettled."],
+      ["F", "I want to be held, and I flinch when they try."]
+    ]},
+  { q: "Which sentence feels most true in your gut, not your head?",
+    a: [
+      ["S", "I'm worth loving, and most people mean well."],
+      ["A", "If I'm not careful, I'll be left."],
+      ["V", "I'm safest when I don't need anyone."],
+      ["F", "I want love, but getting close to it is dangerous."]
+    ]},
+  { q: "Which describes your dating pattern best?",
+    a: [
+      ["A", "I fall fast, give a lot, and end up chasing people who give less."],
+      ["V", "I'm great at the beginning, then find reasons to leave once it's real."],
+      ["S", "I take my time, choose carefully and keep talking through the rough bits."],
+      ["F", "I pick people who are intense or unavailable, and it ends up chaotic."]
     ]}
 ];
+
+/* each answer adds to two scores: anxiety and avoidance (0 to 3 each) */
+const WEIGHT = { S:[0,0], A:[3,0], V:[0,3], F:[3,3] };
 
 const RESULTS = {
   S: {
     title: "Secure",
-    sub: "Comfortable with closeness and with space",
-    body: "You tend to trust that you are lovable and that other people can be relied on. You can be close without losing yourself, and you can handle distance without panic. That doesn't mean you never struggle. It means that when you do, you can usually talk about it.",
+    sub: "Low anxiety, low avoidance",
+    body: "Your answers point to a settled sense that you are worth loving and that other people are, on balance, safe to rely on. That doesn't make you immune to hurt. It means distance doesn't set off alarms and closeness doesn't feel like a threat, so when something goes wrong you are more likely to stay in the room and repair it.",
     looks: [
-      "You say what you need without turning it into a fight",
-      "You don't read silence as rejection",
-      "You can leave a relationship that isn't right without drowning in it",
-      "You give people the benefit of the doubt, but not forever"
+      "You can ask for what you need without turning it into a test",
+      "Silence reads as silence, not as rejection",
+      "You can disagree and stay connected",
+      "You can leave something that isn't right without being destroyed by it"
     ],
-    work: [
-      "Watch for staying too long out of loyalty. Secure doesn't mean tolerating everything",
-      "Be patient with partners who aren't secure. You can be steady without carrying them",
-      "Keep choosing people who show up consistently, not just in the good moments"
-    ],
-    john: "Secure isn't perfect. It's being able to repair. Real connection beats chemistry every time."
+    john: "Secure isn't never struggling. It's being able to come back after the struggle."
   },
   A: {
     title: "Anxious",
-    sub: "You love deeply and fear losing it",
-    body: "You crave closeness and notice every shift in tone, every slow reply. Underneath it is usually a worry that you have to earn love or that it can disappear. Your intuition is real, but anxiety turns it into noise. Your sensitivity isn't a flaw. It just needs steadier ground.",
+    sub: "High anxiety, lower avoidance",
+    body: "Your attachment system is switched on high. Closeness matters enormously to you, so gaps (a late reply, a flat tone, a quiet evening) can register as possible loss. That vigilance usually began as a way of staying connected to someone whose availability felt uncertain. It is intelligent, but it is expensive: you can end up over-giving and over-explaining to keep people close.",
     looks: [
-      "Overthinking messages and waiting for replies",
-      "Needing reassurance to feel okay",
-      "Chasing people who are inconsistent, because the highs feel like chemistry",
-      "Putting the relationship ahead of your own needs"
+      "You scan for changes in tone, tempo and attention",
+      "Reassurance helps for an hour, then the doubt returns",
+      "You can mistake intensity for intimacy",
+      "You apologise to end tension, even when it isn't yours to carry"
     ],
-    work: [
-      "Pause before you send the second message. Let one clear message be enough",
-      "Build self-worth that doesn't depend on someone's reply",
-      "Notice the difference between chemistry and anxiety. They feel almost the same",
-      "Choose people whose actions match their words"
-    ],
-    john: "Don't stay to fix or save someone. If you have to chase it, it isn't connection. Your worth isn't up for negotiation."
+    john: "You don't need to need less. You need to learn to settle yourself, so love stops feeling like a test you re-sit every day."
   },
   V: {
     title: "Avoidant",
-    sub: "You protect yourself by keeping your distance",
-    body: "You value independence and you've learned to rely on yourself. When someone gets close, you may feel crowded, pull back, or find reasons it won't work. It often looks like strength. Often it's a way to avoid being let down or needing anyone.",
+    sub: "Low anxiety, high avoidance",
+    body: "Your sense of safety has been built on self-reliance. Independence is a real strength, but under stress it becomes a reflex: close down, minimise, move away from what you need. Closeness tends to feel like a loss of autonomy rather than comfort, so the more someone leans in, the more you want to step back. This is usually learned, a way of coping when needing people felt unsafe or pointless.",
     looks: [
-      "Needing space right when things get good",
-      "Finding flaws in people who are getting close",
-      "Keeping feelings to yourself, even with someone you trust",
-      "Going quiet instead of saying what's wrong"
+      "You rely on yourself first, even when support is on offer",
+      "The more someone wants from you, the less you want to give",
+      "In conflict you go quiet, get defensive or leave",
+      "You say \"I'm fine\" when you're not"
     ],
-    work: [
-      "Practise saying one honest feeling out loud, even a small one",
-      "When you want to pull away, say 'I need a bit of space', not nothing",
-      "Notice if you only want people who aren't fully available",
-      "Let someone help you before you absolutely need it"
-    ],
-    john: "Needing no one isn't strength. Letting the right person see the real you takes more courage than any independence."
+    john: "Independence is a strength until it becomes a wall. You don't have to give up your freedom to let someone in."
   },
   F: {
-    title: "Fearful-Avoidant",
-    sub: "You want closeness and fear it in equal measure",
-    body: "You may swing between wanting someone close and needing to run. Love can feel exciting and unsafe at once. This pattern often grows from relationships that were unpredictable early on. It makes sense, and it can change.",
+    title: "Fearful-avoidant",
+    sub: "High anxiety, high avoidance",
+    body: "Both systems are active at once: a strong wish for closeness and a strong alarm about it. You may feel pulled towards someone and pushed away from them within the same hour. This push and pull often develops when the people you needed were also a source of stress. It is confusing for you and for partners, but it is well understood, and it changes with the right relationships and the right work.",
     looks: [
-      "Hot and cold in relationships, sometimes in the same day",
-      "Strong feelings and strong urges to withdraw",
-      "Testing people, or expecting to be let down",
-      "Struggling to tell what you want from what you fear"
+      "You want closeness and fear it, often in the same hour",
+      "Intense beginnings, sudden retreats",
+      "Conflict feels dangerous, so your reactions swing",
+      "Part of you tests whether people will stay"
     ],
-    work: [
-      "Slow things down. Intensity isn't intimacy",
-      "Learn what you feel before you decide what to do about it",
-      "Pick consistent people and let consistency feel boring for a while",
-      "Consider working with a coach or therapist. This pattern changes best with support"
-    ],
-    john: "You're not too much, and you're not broken. You learned to protect yourself. Now you can learn to be safe with someone."
+    john: "The push and pull isn't a flaw in your character. It's an old protection that's still running. Once you can see it, you can choose differently."
   }
 };
 
+const CONFLICT = {
+  S: { t: "Steady", b: "In conflict you tend to stay in the room, say what you feel and listen. You can take a break without it feeling like abandonment, and you come back. That is the strongest predictor of repair: disagreements don't turn into damage." },
+  A: { t: "Pursuer", b: "In conflict you move towards: you want to talk now, resolve now, be reassured now. If your partner withdraws, you tend to escalate. This is the classic pursue and withdraw cycle: the harder you push, the quieter they get, and the quieter they get, the harder you push." },
+  V: { t: "Withdrawer", b: "In conflict you move away: you go quiet, get defensive or leave. For you it's a way of staying calm. To a partner it can feel like stonewalling, and the silence can hurt more than the argument. Learning to say \"I need twenty minutes, and I will come back\" changes everything." },
+  F: { t: "Swinger", b: "In conflict you flip between pursuing and withdrawing, sometimes in the same argument. It's hard for a partner to predict which version they'll meet, so they often feel they're walking on eggshells. Slowing the first thirty seconds is where the change starts." }
+};
+
 const $ = id => document.getElementById(id);
-let idx = 0, answers = [];
+let idx = 0, answers = [], orders = [];
+
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function level(p){ return p >= 33 ? "High" : (p >= 20 ? "Moderate" : "Low"); }
 
 function show(id){ ["intro","quiz","result"].forEach(s => $(s).hidden = (s !== id)); window.scrollTo({top:0,behavior:"smooth"}); }
 
@@ -341,8 +432,9 @@ function renderQ(){
   $("ptxt").textContent = "Question " + (idx+1) + " of " + QUESTIONS.length;
   $("fill").style.width = (idx / QUESTIONS.length * 100) + "%";
   $("backBtn").hidden = idx === 0;
+  if (!orders[idx]) orders[idx] = shuffle(item.a);
   const box = $("opts"); box.innerHTML = "";
-  item.a.forEach(([style, text]) => {
+  orders[idx].forEach(([style, text]) => {
     const b = document.createElement("button");
     b.type = "button"; b.className = "opt"; b.textContent = text;
     if (answers[idx] === style) b.classList.add("sel");
@@ -359,26 +451,43 @@ function renderQ(){
 
 function finish(){
   $("fill").style.width = "100%";
-  const count = {S:0,A:0,V:0,F:0};
-  answers.forEach(s => count[s]++);
-  const max = Math.max(...Object.values(count));
-  const tied = Object.keys(count).filter(k => count[k] === max);
-  let style = tied[0];
-  if (tied.length > 1 && tied.includes(answers[answers.length-1])) style = answers[answers.length-1];
+  let anx = 0, avo = 0;
+  answers.forEach(s => { anx += WEIGHT[s][0]; avo += WEIGHT[s][1]; });
+  const max = QUESTIONS.length * 3;
+  const aP = Math.round(anx / max * 100), vP = Math.round(avo / max * 100);
+  const hiA = aP >= 33, hiV = vP >= 33;
+  const style = (hiA && hiV) ? "F" : hiA ? "A" : hiV ? "V" : "S";
   const r = RESULTS[style];
-  window.__style = r.title;
+
+  /* conflict pattern from the four conflict questions */
+  const cc = {S:0,A:0,V:0,F:0};
+  let last = "S";
+  QUESTIONS.forEach((q, i) => { if (q.conflict){ cc[answers[i]]++; last = answers[i]; } });
+  const cmax = Math.max(...Object.values(cc));
+  const ctied = Object.keys(cc).filter(k => cc[k] === cmax);
+  const cp = ctied.includes(last) ? last : ctied[0];
+
+  let sub = r.sub;
+  if (style === "S" && (aP >= 20 || vP >= 20)) sub = "Low anxiety, low avoidance, with a streak of " + ((aP >= 20 && vP >= 20) ? "anxiety and avoidance" : (aP >= 20 ? "anxiety" : "avoidance")) + " under stress";
+
+  window.__style = r.title; window.__anx = aP; window.__avo = vP; window.__conflict = CONFLICT[cp].t;
   $("rTitle").textContent = r.title;
-  $("rSub").textContent = r.sub;
+  $("rSub").textContent = sub;
   $("rBody").textContent = r.body;
+  $("anxLvl").textContent = level(aP) + " · " + aP + "%";
+  $("avoLvl").textContent = level(vP) + " · " + vP + "%";
+  $("anxFill").style.width = "0"; $("avoFill").style.width = "0";
+  setTimeout(() => { $("anxFill").style.width = Math.max(aP,3) + "%"; $("avoFill").style.width = Math.max(vP,3) + "%"; }, 150);
+  $("cpTitle").textContent = CONFLICT[cp].t;
+  $("cpBody").textContent = CONFLICT[cp].b;
   $("rLooks").innerHTML = r.looks.map(x => "<li>"+x+"</li>").join("");
-  $("rWork").innerHTML = r.work.map(x => "<li>"+x+"</li>").join("");
   $("rJohn").textContent = "“" + r.john + "”";
   show("result");
 }
 
-$("startBtn").addEventListener("click", () => { idx = 0; answers = []; show("quiz"); renderQ(); });
+$("startBtn").addEventListener("click", () => { idx = 0; answers = []; orders = []; show("quiz"); renderQ(); });
 $("backBtn").addEventListener("click", () => { if (idx > 0){ idx--; renderQ(); } });
-$("retakeBtn").addEventListener("click", () => { idx = 0; answers = []; $("capForm").reset(); $("capMsg").textContent = ""; $("capMsg").className = "msg"; $("subBtn").disabled = false; show("quiz"); renderQ(); });
+$("retakeBtn").addEventListener("click", () => { idx = 0; answers = []; orders = []; $("capForm").reset(); $("capMsg").textContent = ""; $("capMsg").className = "msg"; $("subBtn").disabled = false; show("quiz"); renderQ(); });
 
 $("capForm").addEventListener("submit", async e => {
   e.preventDefault();
@@ -391,10 +500,10 @@ $("capForm").addEventListener("submit", async e => {
     const res = await fetch(FORM_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ email, attachment_style: window.__style, source: "Attachment Quiz", consent: "yes", _subject: "New Connection Code quiz signup" })
+      body: JSON.stringify({ email, attachment_style: window.__style, anxiety_percent: window.__anx, avoidance_percent: window.__avo, conflict_pattern: window.__conflict, source: "Attachment Quiz (16 questions)", consent: "yes", _subject: "Full report request: " + window.__style + " (anx " + window.__anx + "%, avo " + window.__avo + "%)" })
     });
     if (!res.ok) throw new Error("bad");
-    msg.className = "msg ok"; msg.textContent = "Thank you. You're on the list.";
+    msg.className = "msg ok"; msg.textContent = "Thank you. I'll send your full report to your inbox.";
     $("capForm").querySelectorAll("input").forEach(i => i.disabled = true);
   } catch (err){
     $("subBtn").disabled = false;
