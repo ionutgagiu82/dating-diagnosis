@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Connection Course — Coach John Gagiu</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #0a0a0a;
-    --off-white: #f5f0e8;
-    --accent: #c8392b;
-    --gold: #d4a853;
-    --muted: #7a7060;
-    --card: #141414;
-    --border: rgba(255,255,255,0.07);
+    --black: #FAFAF7;
+    --off-white: #1A1714;
+    --accent: #C49A4A;
+    --gold: #C49A4A;
+    --muted: #6E6560;
+    --card: #FFFFFF;
+    --border: rgba(26,23,20,0.112);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { background: var(--black); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+  body { background: var(--black); color: var(--off-white); font-family: 'Outfit', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
 
   .grain { position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.5; }
 
@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: radial-gradient(ellipse at 50% 50%, rgba(200,57,43,0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(196,154,74,0.06) 0%, transparent 70%);
   }
 
   .gate-card {
@@ -39,7 +39,7 @@
   }
 
   .gate-logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     font-style: italic;
     color: var(--gold);
@@ -54,7 +54,7 @@
   }
 
   .gate-card h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
     font-weight: 900;
     line-height: 1.15;
@@ -73,9 +73,9 @@
   .gate-input {
     width: 100%;
     background: var(--card);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(26,23,20,0.192);
     padding: 16px 20px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 16px;
     color: var(--off-white);
     letter-spacing: 0.15em;
@@ -94,7 +94,7 @@
     color: white;
     border: none;
     padding: 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -104,7 +104,7 @@
     margin-bottom: 16px;
   }
 
-  .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,57,43,0.35); }
+  .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,154,74,0.35); }
 
   .gate-error {
     font-size: 13px;
@@ -115,7 +115,7 @@
 
   .gate-help {
     font-size: 12px;
-    color: rgba(255,255,255,0.2);
+    color: rgba(26,23,20,0.32);
     margin-top: 24px;
   }
 
@@ -130,13 +130,13 @@
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
-    background: rgba(10,10,10,0.95);
+    background: rgba(250,250,247,0.95);
     backdrop-filter: blur(12px);
     z-index: 100;
   }
 
   .nav-logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     font-style: italic;
     color: var(--gold);
@@ -183,7 +183,7 @@
   }
 
   .course-hero h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(36px, 5vw, 60px);
     font-weight: 900;
     line-height: 1.08;
@@ -256,14 +256,14 @@
     transition: transform 0.3s;
   }
 
-  .module-card:hover { background: rgba(255,255,255,0.03); }
+  .module-card:hover { background: rgba(26,23,20,0.048); }
   .module-card:hover::before { transform: scaleX(1); }
 
   .module-num {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 56px;
     font-weight: 900;
-    color: rgba(255,255,255,0.04);
+    color: rgba(26,23,20,0.064);
     line-height: 1;
     margin-bottom: 20px;
     position: absolute;
@@ -290,7 +290,7 @@
   }
 
   .module-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     font-weight: 700;
     font-style: italic;
@@ -319,7 +319,7 @@
 
   /* START HERE */
   .start-section {
-    background: rgba(255,255,255,0.02);
+    background: rgba(26,23,20,0.032);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 60px 48px;
@@ -336,7 +336,7 @@
   }
 
   .start-inner h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 16px;
@@ -365,7 +365,7 @@
   .step-num {
     width: 28px;
     height: 28px;
-    border: 1px solid rgba(212,168,83,0.3);
+    border: 1px solid rgba(196,154,74,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -378,7 +378,7 @@
 
   .step-text {
     font-size: 15px;
-    color: rgba(245,240,232,0.75);
+    color: rgba(26,23,20,0.75);
     line-height: 1.6;
   }
 
@@ -392,8 +392,8 @@
   }
 
   .coaching-banner {
-    background: linear-gradient(135deg, rgba(212,168,83,0.08), rgba(200,57,43,0.05));
-    border: 1px solid rgba(212,168,83,0.25);
+    background: linear-gradient(135deg, rgba(196,154,74,0.08), rgba(196,154,74,0.05));
+    border: 1px solid rgba(196,154,74,0.25);
     padding: 48px 40px;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -412,7 +412,7 @@
   }
 
   .coaching-banner h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 8px;
@@ -432,7 +432,7 @@
     color: white;
     text-decoration: none;
     padding: 16px 32px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -441,14 +441,14 @@
     transition: all 0.2s;
   }
 
-  .coaching-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,57,43,0.35); }
+  .coaching-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,154,74,0.35); }
 
   footer {
     border-top: 1px solid var(--border);
     padding: 28px 48px;
     text-align: center;
     font-size: 13px;
-    color: rgba(255,255,255,0.2);
+    color: rgba(26,23,20,0.32);
   }
 
   @media (max-width: 768px) {
@@ -462,6 +462,8 @@
     .coaching-banner { grid-template-columns: 1fr; }
     footer { padding: 24px 20px; }
   }
+.grain,.noise{display:none!important}
+body{-webkit-font-smoothing:antialiased}
 </style>
 </head>
 <body>
